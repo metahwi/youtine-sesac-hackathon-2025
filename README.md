@@ -35,18 +35,14 @@
         <!-- ✅ 교체 완료: 실제 스크린샷 -->
         <img src="./demos/screenshots/01-landing-page.png" alt="YouTine Landing Page" width="100%"/>
         <br/>
-        <sub><i>📸 촬영 필요: web-app/client (http://localhost:5173)</i></sub>
-        <br/>
         <sub>AI가 분석한 운동 구간들을 카드 형태로 표시</sub>
       </p>
     </td>
     <td width="50%">
       <h3 align="center">➕ YouTube Video Analysis</h3>
       <p align="center">
-        <!-- 🔄 교체: ./demos/screenshots/02-video-adding.png -->
-        <img src="https://via.placeholder.com/600x400/50C878/FFFFFF?text=Video+Adding+UI" alt="Video Adding" width="100%"/>
-        <br/>
-        <sub><i>📸 촬영 필요: URL 입력 → AI 분석 과정</i></sub>
+        <!-- ✅ 교체 완료: 실제 스크린샷 -->
+        <img src="./demos/screenshots/02-video-adding.png" alt="Video Adding" width="100%"/>
         <br/>
         <sub>유튜브 URL 입력 시 자동으로 운동 구간 추출</sub>
       </p>
@@ -54,12 +50,19 @@
   </tr>
   <tr>
     <td width="50%">
+      <h3 align="center">✂️ AI-Powered Segment Editor</h3>
+      <p align="center">
+        <!-- ✅ 교체 완료: 실제 스크린샷 -->
+        <img src="./demos/screenshots/03-segments.png" alt="Segment Customization" width="100%"/>
+        <br/>
+        <sub>LLM API와 Transcript를 활용한 영상 구간 분할 및 커스터마이징</sub>
+      </p>
+    </td>
+    <td width="50%">
       <h3 align="center">🎬 SmartPlayer (핵심 기능)</h3>
       <p align="center">
-        <!-- 🔄 교체: ./demos/screenshots/03-smartplayer.png -->
-        <img src="https://via.placeholder.com/600x400/FF6B6B/FFFFFF?text=SmartPlayer+Interface" alt="SmartPlayer" width="100%"/>
-        <br/>
-        <sub><i>📸 촬영 필요: 루틴 재생 중 화면</i></sub>
+        <!-- ✅ 교체 완료: 실제 스크린샷 -->
+        <img src="./demos/screenshots/05-smartplayer.png" alt="SmartPlayer" width="100%"/>
         <br/>
         <sub>여러 영상의 구간들을 끊김 없이 연속 재생</sub>
       </p>
@@ -67,10 +70,8 @@
     <td width="50%">
       <h3 align="center">📊 Dashboard & Analytics</h3>
       <p align="center">
-        <!-- 🔄 교체: ./demos/screenshots/04-dashboard.png -->
-        <img src="https://via.placeholder.com/600x400/9B59B6/FFFFFF?text=Dashboard+View" alt="Dashboard" width="100%"/>
-        <br/>
-        <sub><i>📸 촬영 필요: 통계 및 캘린더 화면</i></sub>
+        <!-- ✅ 교체 완료: 실제 스크린샷 -->
+        <img src="./demos/screenshots/04-dashboard.png" alt="Dashboard" width="100%"/>
         <br/>
         <sub>운동 기록, 스트릭, 통계 시각화</sub>
       </p>
@@ -80,10 +81,8 @@
     <td colspan="2">
       <h3 align="center">🤖 AI Motion Coaching (Python Prototype)</h3>
       <p align="center">
-        <!-- 🔄 교체: ./demos/screenshots/05-motion-tracking.png -->
-        <img src="https://via.placeholder.com/1200x400/E67E22/FFFFFF?text=OpenCV+Motion+Tracking" alt="Motion Tracking" width="100%"/>
-        <br/>
-        <sub><i>📸 촬영 필요: python tests/test_squat.py 실행 화면</i></sub>
+        <!-- ✅ 교체 완료: 실제 GIF -->
+        <img src="./demos/gifs/06-motiontracking.gif" alt="Motion Tracking" width="100%"/>
         <br/>
         <sub>MediaPipe + OpenCV로 실시간 자세 분석 및 피드백</sub>
       </p>
