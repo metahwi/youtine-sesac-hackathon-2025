@@ -12,20 +12,13 @@
 
 **팀명**: 잭과 콩이담 | **팀원**: 강이담, 이재휘
 
-[📺 데모 보기](#-데모-영상) · [🚀 시작하기](#%EF%B8%8F-설치-및-실행-방법) · [📚 문서](./docs) · [🎬 촬영 가이드](./DEMO_GUIDE.md)
+[📺 데모 보기](#-데모-영상) · [🚀 시작하기](#%EF%B8%8F-설치-및-실행-방법) · [📚 문서](./docs)
 
 </div>
 
 ---
 
 ## 📺 데모 영상
-
-> 💡 **스크린샷 교체 가이드**: [📸 demos/SCREENSHOT_GUIDE.md](./demos/SCREENSHOT_GUIDE.md)
->
-> **스크린샷 저장 위치**: `demos/screenshots/*.png`
-> **교체할 이미지**: 아래 5개 placeholder 이미지
->
-> 자세한 촬영 방법: [🎬 DEMO_GUIDE.md](./DEMO_GUIDE.md)
 
 <table>
   <tr>
@@ -52,7 +45,6 @@
     <td width="50%">
       <h3 align="center">✂️ AI-Powered Segment Editor</h3>
       <p align="center">
-        <!-- ✅ 교체 완료: 실제 스크린샷 -->
         <img src="./demos/screenshots/03-segments.png" alt="Segment Customization" width="100%"/>
         <br/>
         <sub>LLM API와 Transcript를 활용한 영상 구간 분할 및 커스터마이징</sub>
@@ -61,27 +53,24 @@
     <td width="50%">
       <h3 align="center">🎬 SmartPlayer (핵심 기능)</h3>
       <p align="center">
-        <!-- ✅ 교체 완료: 실제 스크린샷 -->
         <img src="./demos/screenshots/05-smartplayer.png" alt="SmartPlayer" width="100%"/>
         <br/>
         <sub>여러 영상의 구간들을 끊김 없이 연속 재생</sub>
       </p>
     </td>
+  </tr>
+  <tr>
     <td width="50%">
       <h3 align="center">📊 Dashboard & Analytics</h3>
       <p align="center">
-        <!-- ✅ 교체 완료: 실제 스크린샷 -->
         <img src="./demos/screenshots/04-dashboard.png" alt="Dashboard" width="100%"/>
         <br/>
         <sub>운동 기록, 스트릭, 통계 시각화</sub>
       </p>
     </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <h3 align="center">🤖 AI Motion Coaching (Python Prototype)</h3>
+    <td width="50%">
+      <h3 align="center">🤖 AI Motion Coaching</h3>
       <p align="center">
-        <!-- ✅ 교체 완료: 실제 GIF -->
         <img src="./demos/gifs/06-motiontracking.gif" alt="Motion Tracking" width="100%"/>
         <br/>
         <sub>MediaPipe + OpenCV로 실시간 자세 분석 및 피드백</sub>
@@ -92,11 +81,7 @@
 
 ### 🎥 데모 영상 (YouTube)
 
-> 📹 **2-3분 데모 영상을 업로드한 후 아래 링크를 교체하세요**
->
-> [![YouTube Demo](https://img.shields.io/badge/YouTube-Demo_Video-red?logo=youtube)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
->
-> *데모 영상 준비 중 - [촬영 가이드 보기](./DEMO_GUIDE.md)*
+> *데모 영상 준비 중*
 
 ---
 
@@ -144,9 +129,7 @@
 ### 2️⃣ AI 모션 코칭 (How to do)
 
 <div align="center">
-  <img src="https://via.placeholder.com/800x300/FF5722/FFFFFF?text=AI+Motion+Coaching" alt="Motion Coaching" width="80%"/>
-  <br/>
-  <sub><i>📸 촬영 필요: 스쿼트 동작 + 포즈 트래킹 + 피드백 표시 GIF</i></sub>
+  <img src="./demos/gifs/05-motiontracking.gif" alt="AI Motion Coaching" width="80%"/>
 </div>
 
 <br/>
@@ -554,8 +537,8 @@ NODE_ENV=development
 
 | 이름 | 역할 | GitHub |
 |------|------|--------|
-| **강이담** | 기획 및 프론트엔드 개발 | - |
-| **이재휘** | 백엔드 및 AI 개발 | [@metahwi](https://github.com/metahwi) |
+| **강이담** | 서비스 기획 · 브랜딩/디자인 | - |
+| **이재휘** | UX · 프론트엔드 · 백엔드 · AI/CV · 시스템 아키텍처 | [@metahwi](https://github.com/metahwi) |
 
 </div>
 
