@@ -4,11 +4,11 @@
 
 > **혼자 운동하는 갓생러들을 위한 AI 기반 융합 헬스케어 서비스**
 
-[![2025 새싹 해커톤](https://img.shields.io/badge/2025-새싹%20해커톤-brightgreen)](https://github.com/metahwi/youtine-sesac-hackathon-2025)
-[![React](https://img.shields.io/badge/React-19.1.0-blue)](https://react.dev)
-[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4--mini-orange)](https://openai.com)
-[![OpenCV](https://img.shields.io/badge/OpenCV-Motion%20Tracking-red)](https://opencv.org)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/metahwi/youtine-sesac-hackathon-2025)
+[![2025 SeSAC Hackathon](https://img.shields.io/badge/2025-SeSAC_Hackathon-00D084?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkSURBVHgB7cxBDQAgAMDAjv+fBiMIlEwvFPpnFmZjYWZmZnYBLycEF0vKFzwAAAAASUVORK5CYII=)](https://github.com/metahwi/youtine-sesac-hackathon-2025)
+[![React](https://img.shields.io/badge/React-19.1.0-61DAFB?style=flat-square&logo=react)](https://react.dev)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4--mini-412991?style=flat-square&logo=openai)](https://openai.com)
+[![OpenCV](https://img.shields.io/badge/OpenCV-Motion_Tracking-5C3EE8?style=flat-square&logo=opencv)](https://opencv.org)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/metahwi/youtine-sesac-hackathon-2025)
 
 **팀명**: 잭과 콩이담 | **팀원**: 강이담, 이재휘
 
@@ -20,15 +20,19 @@
 
 ## 📺 데모 영상
 
-> 💡 **스크린샷을 촬영한 후 아래 placeholder 이미지를 교체하세요!**
+> 💡 **스크린샷 교체 가이드**: [📸 demos/SCREENSHOT_GUIDE.md](./demos/SCREENSHOT_GUIDE.md)
 >
-> 촬영 가이드: [DEMO_GUIDE.md](./DEMO_GUIDE.md)
+> **스크린샷 저장 위치**: `demos/screenshots/*.png`
+> **교체할 이미지**: 아래 5개 placeholder 이미지
+>
+> 자세한 촬영 방법: [🎬 DEMO_GUIDE.md](./DEMO_GUIDE.md)
 
 <table>
   <tr>
     <td width="50%">
       <h3 align="center">🎨 YouTine Web Application</h3>
       <p align="center">
+        <!-- 🔄 교체: ./demos/screenshots/01-landing-page.png -->
         <img src="https://via.placeholder.com/600x400/4A90E2/FFFFFF?text=YouTine+Landing+Page" alt="YouTine Landing Page" width="100%"/>
         <br/>
         <sub><i>📸 촬영 필요: web-app/client (http://localhost:5173)</i></sub>
@@ -39,6 +43,7 @@
     <td width="50%">
       <h3 align="center">➕ YouTube Video Analysis</h3>
       <p align="center">
+        <!-- 🔄 교체: ./demos/screenshots/02-video-adding.png -->
         <img src="https://via.placeholder.com/600x400/50C878/FFFFFF?text=Video+Adding+UI" alt="Video Adding" width="100%"/>
         <br/>
         <sub><i>📸 촬영 필요: URL 입력 → AI 분석 과정</i></sub>
@@ -51,6 +56,7 @@
     <td width="50%">
       <h3 align="center">🎬 SmartPlayer (핵심 기능)</h3>
       <p align="center">
+        <!-- 🔄 교체: ./demos/screenshots/03-smartplayer.png -->
         <img src="https://via.placeholder.com/600x400/FF6B6B/FFFFFF?text=SmartPlayer+Interface" alt="SmartPlayer" width="100%"/>
         <br/>
         <sub><i>📸 촬영 필요: 루틴 재생 중 화면</i></sub>
@@ -61,6 +67,7 @@
     <td width="50%">
       <h3 align="center">📊 Dashboard & Analytics</h3>
       <p align="center">
+        <!-- 🔄 교체: ./demos/screenshots/04-dashboard.png -->
         <img src="https://via.placeholder.com/600x400/9B59B6/FFFFFF?text=Dashboard+View" alt="Dashboard" width="100%"/>
         <br/>
         <sub><i>📸 촬영 필요: 통계 및 캘린더 화면</i></sub>
@@ -73,6 +80,7 @@
     <td colspan="2">
       <h3 align="center">🤖 AI Motion Coaching (Python Prototype)</h3>
       <p align="center">
+        <!-- 🔄 교체: ./demos/screenshots/05-motion-tracking.png -->
         <img src="https://via.placeholder.com/1200x400/E67E22/FFFFFF?text=OpenCV+Motion+Tracking" alt="Motion Tracking" width="100%"/>
         <br/>
         <sub><i>📸 촬영 필요: python tests/test_squat.py 실행 화면</i></sub>
