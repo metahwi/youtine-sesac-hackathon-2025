@@ -39,127 +39,397 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  
-  /* YouTine/Technogym Custom Colors */
-  --color-youtine-yellow: #FFE01E;
-  --color-youtine-black: #000000;
-  --color-youtine-grey: #2C2C2C;
-  --color-youtine-light-grey: #F5F5F5;
+
+  /* YouTine HYPER SPORTY Colors */
+  --color-youtine-orange: #FF4500;
+  --color-youtine-bright-orange: #FF6B35;
+  --color-youtine-red: #DC143C;
+  --color-youtine-gold: #FFD700;
+  --color-youtine-black: #0A0A0A;
+  --color-youtine-dark-grey: #1A1A1A;
+  --color-youtine-white: #FFFFFF;
 }
 
 :root {
-  /* YouTine Brand Colors - Technogym Inspired */
-  --youtine-yellow: #FFE01E;
-  --youtine-black: #000000;
-  --youtine-grey: #2C2C2C;
-  --youtine-light-grey: #F5F5F5;
-  
-  --radius: 0.5rem;
-  --background: oklch(0.99 0 0); /* Near white for clean look */
-  --foreground: oklch(0.1 0 0); /* Near black */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.1 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.1 0 0);
-  
-  /* Primary: YouTine Yellow */
-  --primary: oklch(0.92 0.15 95); /* Yellow #FFE01E */
-  --primary-foreground: oklch(0.1 0 0); /* Black text on yellow */
-  
-  /* Secondary: Black/Grey */
-  --secondary: oklch(0.2 0 0); /* Dark grey/black */
-  --secondary-foreground: oklch(0.99 0 0); /* White text */
-  
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.92 0.15 95); /* Yellow accent */
-  --accent-foreground: oklch(0.1 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.95 0 0);
-  --ring: oklch(0.92 0.15 95); /* Yellow ring */
-  
-  --chart-1: oklch(0.92 0.15 95); /* Yellow */
-  --chart-2: oklch(0.2 0 0); /* Black */
-  --chart-3: oklch(0.4 0 0); /* Grey */
-  --chart-4: oklch(0.6 0 0); /* Light grey */
-  --chart-5: oklch(0.8 0 0); /* Very light grey */
-  
-  --sidebar: oklch(0.99 0 0);
-  --sidebar-foreground: oklch(0.1 0 0);
-  --sidebar-primary: oklch(0.92 0.15 95); /* Yellow */
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.96 0 0);
-  --sidebar-accent-foreground: oklch(0.1 0 0);
-  --sidebar-border: oklch(0.9 0 0);
-  --sidebar-ring: oklch(0.92 0.15 95);
+  /* YouTine HYPER SPORTY Brand Colors */
+  --youtine-orange: #FF4500;
+  --youtine-bright-orange: #FF6B35;
+  --youtine-red: #DC143C;
+  --youtine-gold: #FFD700;
+  --youtine-black: #0A0A0A;
+  --youtine-dark-grey: #1A1A1A;
+  --youtine-white: #FFFFFF;
+
+  --radius: 0.75rem;
+
+  /* INVERTED FIRE THEME: Orange Red Background */
+  --background: #FF4500;
+  --foreground: #FFFFFF;
+  --card: #0A0A0A;
+  --card-foreground: #FFFFFF;
+  --popover: #0A0A0A;
+  --popover-foreground: #FFFFFF;
+
+  /* Primary: White (for buttons on orange background) */
+  --primary: #FFFFFF;
+  --primary-foreground: #0A0A0A;
+
+  /* Secondary: Black */
+  --secondary: #0A0A0A;
+  --secondary-foreground: #FFFFFF;
+
+  --muted: rgba(255, 255, 255, 0.1);
+  --muted-foreground: rgba(255, 255, 255, 0.7);
+  --accent: #FFD700;
+  --accent-foreground: #0A0A0A;
+  --destructive: #DC143C;
+  --border: rgba(255, 215, 0, 0.3);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #FFD700;
+
+  --chart-1: #FFD700;
+  --chart-2: #FFFFFF;
+  --chart-3: #FF6B35;
+  --chart-4: rgba(255, 255, 255, 0.5);
+  --chart-5: #DC143C;
+
+  --sidebar: rgba(10, 10, 10, 0.8);
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #FFFFFF;
+  --sidebar-primary-foreground: #0A0A0A;
+  --sidebar-accent: rgba(255, 255, 255, 0.1);
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: rgba(255, 215, 0, 0.3);
+  --sidebar-ring: #FFD700;
+
+  /* Typography */
+  --font-display: 'Bebas Neue', 'Oswald', sans-serif;
+  --font-body: 'Barlow', sans-serif;
 }
 
 .dark {
-  --background: oklch(0.1 0 0); /* Black background */
-  --foreground: oklch(0.99 0 0); /* White text */
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.99 0 0);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.99 0 0);
-  --primary: oklch(0.92 0.15 95); /* Yellow stays bright */
-  --primary-foreground: oklch(0.1 0 0);
-  --secondary: oklch(0.25 0 0);
-  --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.92 0.15 95); /* Yellow accent */
-  --accent-foreground: oklch(0.1 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.92 0.15 95);
-  --chart-1: oklch(0.92 0.15 95);
-  --chart-2: oklch(0.8 0 0);
-  --chart-3: oklch(0.6 0 0);
-  --chart-4: oklch(0.4 0 0);
-  --chart-5: oklch(0.3 0 0);
-  --sidebar: oklch(0.15 0 0);
-  --sidebar-foreground: oklch(0.99 0 0);
-  --sidebar-primary: oklch(0.92 0.15 95);
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.2 0 0);
-  --sidebar-accent-foreground: oklch(0.99 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.92 0.15 95);
+  --background: #0A0A0A;
+  --foreground: #FFFFFF;
+  --card: #1A1A1A;
+  --card-foreground: #FFFFFF;
+  --popover: #1A1A1A;
+  --popover-foreground: #FFFFFF;
+  --primary: #FF4500;
+  --primary-foreground: #FFFFFF;
+  --secondary: #FF6B35;
+  --secondary-foreground: #FFFFFF;
+  --muted: #2A2A2A;
+  --muted-foreground: #999999;
+  --accent: #FFD700;
+  --accent-foreground: #0A0A0A;
+  --destructive: #DC143C;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #FF4500;
+  --chart-1: #FF4500;
+  --chart-2: #FF6B35;
+  --chart-3: #FFD700;
+  --chart-4: #DC143C;
+  --chart-5: #FFFFFF;
+  --sidebar: #1A1A1A;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #FF4500;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #2A2A2A;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #FF4500;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 }
 
-/* YouTine Custom Utilities */
-.text-youtine-yellow {
-  color: var(--youtine-yellow);
+/* INVERTED FIRE Background - Arena Energy */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(135deg, #FF4500 0%, #FF6B35 25%, #DC143C 50%, #FF4500 75%, #FF6B35 100%),
+    linear-gradient(135deg, transparent 0%, transparent 40%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.05) 45%, transparent 45%),
+    linear-gradient(-135deg, transparent 0%, transparent 40%, rgba(255, 215, 0, 0.08) 40%, rgba(255, 215, 0, 0.08) 45%, transparent 45%);
+  background-size: 400% 400%, 200px 200px, 180px 180px;
+  z-index: -1;
+  pointer-events: none;
+  animation: fireFlow 30s ease infinite, energyFlow 20s linear infinite;
 }
 
-.bg-youtine-yellow {
-  background-color: var(--youtine-yellow);
+@keyframes fireFlow {
+  0%, 100% { background-position: 0% 50%, 0 0, 0 0; }
+  50% { background-position: 100% 50%, 0 0, 0 0; }
+}
+
+@keyframes energyFlow {
+  0% { background-position: 0% 50%, 0 0, 0 0; }
+  100% { background-position: 0% 50%, 200px 200px, -180px 180px; }
+}
+
+/* Sporty Diagonal Accent */
+.diagonal-accent {
+  position: relative;
+  overflow: hidden;
+}
+
+.diagonal-accent::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--youtine-orange) 0%, var(--youtine-bright-orange) 100%);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+  opacity: 0.8;
+}
+
+/* Kinetic Shadow */
+.kinetic-shadow {
+  box-shadow:
+    0 4px 8px rgba(255, 69, 0, 0.1),
+    0 8px 16px rgba(255, 69, 0, 0.08),
+    0 16px 32px rgba(255, 69, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kinetic-shadow:hover {
+  box-shadow:
+    0 8px 16px rgba(255, 69, 0, 0.15),
+    0 16px 32px rgba(255, 69, 0, 0.12),
+    0 32px 64px rgba(255, 69, 0, 0.08);
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Champion Button - Black on Orange (High Contrast) */
+.hyper-button,
+.champion-button {
+  position: relative;
+  overflow: hidden;
+  background: #0A0A0A;
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 3px solid #FFFFFF;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.hyper-button::before,
+.champion-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 69, 0, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.hyper-button:hover::before,
+.champion-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.hyper-button:hover,
+.champion-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 255, 255, 0.5);
+  background: #1A1A1A;
+}
+
+.hyper-button:active,
+.champion-button:active {
+  transform: scale(0.98);
+  background: #FFFFFF;
+  color: #0A0A0A;
+  border-color: #0A0A0A;
+}
+
+/* Pulse Animation for Active States - White Glow */
+@keyframes hyperPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.7), 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.pulse-active {
+  animation: hyperPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Staggered Entry Animation */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-item {
+  animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.05s; }
+.stagger-item:nth-child(2) { animation-delay: 0.1s; }
+.stagger-item:nth-child(3) { animation-delay: 0.15s; }
+.stagger-item:nth-child(4) { animation-delay: 0.2s; }
+.stagger-item:nth-child(5) { animation-delay: 0.25s; }
+.stagger-item:nth-child(6) { animation-delay: 0.3s; }
+.stagger-item:nth-child(7) { animation-delay: 0.35s; }
+.stagger-item:nth-child(8) { animation-delay: 0.4s; }
+
+/* Motion Blur Effect */
+.motion-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.motion-hover:hover {
+  transform: translateX(8px);
+  filter: drop-shadow(0 4px 12px rgba(255, 69, 0, 0.3));
+}
+
+/* Energetic Border */
+.energy-border {
+  position: relative;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, var(--youtine-orange), var(--youtine-bright-orange), var(--youtine-gold)) border-box;
+}
+
+/* Sport Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--youtine-orange) 0%, var(--youtine-red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Angular Card */
+.angular-card {
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  background: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.angular-card:hover {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transform: scale(1.02);
+}
+
+/* YouTine Custom Utilities */
+.text-youtine-orange {
+  color: var(--youtine-orange);
+}
+
+.bg-youtine-orange {
+  background-color: var(--youtine-orange);
+}
+
+.bg-youtine-bright-orange {
+  background-color: var(--youtine-bright-orange);
 }
 
 .bg-youtine-black {
   background-color: var(--youtine-black);
 }
 
-.bg-youtine-grey {
-  background-color: var(--youtine-grey);
+.bg-youtine-gold {
+  background-color: var(--youtine-gold);
 }
 
 .text-youtine-black {
   color: var(--youtine-black);
 }
 
-.border-youtine-yellow {
-  border-color: var(--youtine-yellow);
+.border-youtine-orange {
+  border-color: var(--youtine-orange);
+}
+
+.bg-gradient-energy {
+  background: linear-gradient(135deg, var(--youtine-orange) 0%, var(--youtine-red) 100%);
+}
+
+/* FIRE THEME UTILITY CLASSES */
+
+/* Fire Card - Black card with white border on orange background */
+.fire-card {
+  background: rgba(10, 10, 10, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.fire-card:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 69, 0, 0.3);
+}
+
+/* Ghost Button - Transparent with white border (Inactive State) */
+.ghost-button {
+  background: transparent;
+  color: #FFFFFF;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(5px);
+}
+
+.ghost-button:hover {
+  background: rgba(10, 10, 10, 0.5);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+/* Orange Glow Text (replaces gold) */
+.gold-glow {
+  color: #FFFFFF;
+  text-shadow: 0 0 15px rgba(255, 69, 0, 0.8), 0 0 30px rgba(255, 69, 0, 0.4);
+}
+
+/* White Glow for Logo - Enhanced contrast and visibility */
+.white-glow {
+  filter: brightness(1.3) contrast(1.4) drop-shadow(0 0 8px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
 }
 
