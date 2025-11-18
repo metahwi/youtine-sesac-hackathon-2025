@@ -1,0 +1,182 @@
+import { useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import { GripVertical, Play, Clipboard, Trash2, Edit } from 'lucide-react';
+import VideoCard from './VideoCard';
+import { formatDuration } from '../lib/utils';
+import { useLanguage } from '../contexts/LanguageContext';
+
+/**
+ * RoutineDetailView Component
+ * Displays and manages segments within a selected routine
+ * UPDATED: Now displays segments instead of full videos
+ * Supports drag-and-drop reordering and segment playback
+ */
+const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRoutine, onEditSegment }) => {
+  const { t } = useLanguage();
+
+  // Format seconds to MM:SS
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+  
+  if (!routine) {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-8 text-center">
+        <p className="text-gray-500">{t('selectRoutine')}</p>
+      </div>
+    );
+  }
+
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const items = Array.from(routine.segments || []);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    // Update routine with new segment order
+    const segmentIds = items.map(segment => segment._id);
+    onUpdateRoutine({ segments: segmentIds });
+  };
+
+  const totalDuration = routine.segments?.reduce((sum, segment) => sum + (segment.endTime - segment.startTime), 0) || 0;
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="mb-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold mb-2">{routine.name}</h2>
+            {routine.description && (
+              <p className="text-gray-600 mb-2">{routine.description}</p>
+            )}
+            <div className="flex gap-4 text-sm text-gray-500">
+              <span>{routine.segments?.length || 0} {t('segments') || 'segments'}</span>
+              <span>•</span>
+              <span>{t('totalDuration')}: {formatDuration(totalDuration, t)}</span>
+            </div>
+          </div>
+          {routine.segments && routine.segments.length > 0 && onPlayRoutine && (
+            <button
+              onClick={() => onPlayRoutine(routine.segments)}
+              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors font-medium"
+            >
+              <Play className="w-5 h-5" />
+              {t('startRoutine') || 'Start Routine'}
+            </button>
+          )}
+        </div>
+      </div>
+
+      {routine.segments && routine.segments.length > 0 ? (
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="routine-segments">
+            {(provided, snapshot) => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className={`space-y-2 ${snapshot.isDraggingOver ? 'bg-blue-50 p-2 rounded-lg' : ''}`}
+              >
+                {routine.segments.map((segment, index) => (
+                  <Draggable key={segment._id} draggableId={segment._id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        className={`bg-white border rounded-lg p-3 flex items-center gap-3 hover:shadow-md transition-all ${
+                          snapshot.isDragging ? 'shadow-lg border-yellow-400' : 'border-gray-200'
+                        }`}
+                      >
+                        {/* Drag Handle */}
+                        <div {...provided.dragHandleProps} className="cursor-grab active:cursor-grabbing">
+                          <GripVertical className="w-5 h-5 text-gray-400" />
+                        </div>
+
+                        {/* Order Number */}
+                        <div className="flex-shrink-0 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                          {index + 1}
+                        </div>
+
+                        {/* Thumbnail */}
+                        <div className="relative flex-shrink-0">
+                          <img
+                            src={segment.thumbnailUrl}
+                            alt={segment.exerciseName}
+                            className="w-24 h-16 object-cover rounded"
+                          />
+                          <div className="absolute bottom-1 right-1 bg-black/75 text-white text-xs px-1 py-0.5 rounded">
+                            {formatTime(segment.endTime - segment.startTime)}
+                          </div>
+                        </div>
+
+                        {/* Segment Info */}
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-base mb-1">{segment.exerciseName}</h3>
+                          <p className="text-sm text-gray-600 line-clamp-1 mb-1">
+                            {segment.sourceVideoId?.title}
+                          </p>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs text-gray-500">
+                              {formatTime(segment.startTime)} - {formatTime(segment.endTime)}
+                            </span>
+                            {segment.targetMuscles && segment.targetMuscles.length > 0 && (
+                              <>
+                                <span className="text-gray-300">•</span>
+                                <div className="flex gap-1">
+                                  {segment.targetMuscles.slice(0, 3).map((muscle) => (
+                                    <span
+                                      key={muscle}
+                                      className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded"
+                                    >
+                                      {muscle}
+                                    </span>
+                                  ))}
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex gap-2">
+                          {onEditSegment && (
+                            <button
+                              onClick={() => onEditSegment(segment)}
+                              className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm flex items-center gap-1 transition-colors"
+                              title="Edit segment"
+                            >
+                              <Edit className="w-4 h-4" />
+                            </button>
+                          )}
+
+                          <button
+                            onClick={() => onRemoveSegment(segment._id)}
+                            className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded text-sm flex items-center gap-1 transition-colors"
+                            title="Remove from routine"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      ) : (
+        <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+          <p className="text-gray-500 mb-2">{t('emptyRoutine') || 'No segments in this routine yet'}</p>
+          <p className="text-sm text-gray-400">{t('addSegmentsFromLibrary') || 'Add segments from the Exercise Library'}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default RoutineDetailView;
+
