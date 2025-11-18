@@ -2,13 +2,15 @@
 
 > **혼자 운동하는 갓생러들을 위한 AI 기반 융합 헬스케어 서비스**
 
-[![2025 새싹 해커톤](https://img.shields.io/badge/2025-새싹%20해커톤-brightgreen)]()
-[![React](https://img.shields.io/badge/React-19.1.0-blue)]()
-[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4--mini-orange)]()
-[![OpenCV](https://img.shields.io/badge/OpenCV-Motion%20Tracking-red)]()
+[![2025 새싹 해커톤](https://img.shields.io/badge/2025-새싹%20해커톤-brightgreen)](https://github.com/metahwi/youtine-sesac-hackathon-2025)
+[![React](https://img.shields.io/badge/React-19.1.0-blue)](https://react.dev)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4--mini-orange)](https://openai.com)
+[![OpenCV](https://img.shields.io/badge/OpenCV-Motion%20Tracking-red)](https://opencv.org)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/metahwi/youtine-sesac-hackathon-2025)
 
 **팀명**: 잭과 콩이담
 **팀원**: 강이담, 이재휘
+**GitHub**: https://github.com/metahwi/youtine-sesac-hackathon-2025
 
 ---
 
