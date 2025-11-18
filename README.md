@@ -32,8 +32,8 @@
     <td width="50%">
       <h3 align="center">🎨 YouTine Web Application</h3>
       <p align="center">
-        <!-- 🔄 교체: ./demos/screenshots/01-landing-page.png -->
-        <img src="https://via.placeholder.com/600x400/4A90E2/FFFFFF?text=YouTine+Landing+Page" alt="YouTine Landing Page" width="100%"/>
+        <!-- ✅ 교체 완료: 실제 스크린샷 -->
+        <img src="./demos/screenshots/01-landing-page.png" alt="YouTine Landing Page" width="100%"/>
         <br/>
         <sub><i>📸 촬영 필요: web-app/client (http://localhost:5173)</i></sub>
         <br/>
