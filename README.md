@@ -552,7 +552,7 @@ NODE_ENV=development
 
 <div align="center">
 
-**Made with 💪 by 잭과 콩이담 for 2025 새싹 해커톤**
+**Made by 잭과 콩이담 for 2025 새싹 해커톤**
 
 ⭐ 이 프로젝트가 마음에 드셨다면 Star를 눌러주세요!
 
