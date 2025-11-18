@@ -81,8 +81,8 @@ const WorkoutLogger = ({ videoId, onClose }) => {
   if (loading) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg p-8">
-          <Loader className="w-8 h-8 animate-spin text-blue-600" />
+        <div className="fire-card rounded-lg p-8">
+          <Loader className="w-8 h-8 animate-spin text-white" />
         </div>
       </div>
     );
@@ -94,12 +94,12 @@ const WorkoutLogger = ({ videoId, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="fire-card rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
+        <div className="sticky top-0 fire-card border-b border-white/20 p-4 flex justify-between items-center">
           <div>
-            <h2 className="text-2xl font-bold">{video.title}</h2>
-            <p className="text-gray-600 mt-1">
+            <h2 className="text-2xl font-bold gold-glow" style={{ fontFamily: 'var(--font-display)' }}>{video.title}</h2>
+            <p className="text-white/70 mt-1">
               {video.status === 'pending' && '⏳ Analyzing video...'}
               {video.status === 'completed' && `✅ ${video.segments.length} exercises detected`}
               {video.status === 'failed' && '❌ Analysis failed'}
@@ -107,7 +107,7 @@ const WorkoutLogger = ({ videoId, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 text-2xl"
+            className="text-white/70 hover:text-white text-2xl"
           >
             ×
           </button>
@@ -117,23 +117,23 @@ const WorkoutLogger = ({ videoId, onClose }) => {
         <div className="p-6">
           {video.status === 'pending' && (
             <div className="text-center py-12">
-              <Loader className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
-              <p className="text-gray-600">Analyzing video with AI...</p>
-              <p className="text-sm text-gray-500 mt-2">This may take a minute</p>
+              <Loader className="w-12 h-12 animate-spin text-white mx-auto mb-4" />
+              <p className="text-white">Analyzing video with AI...</p>
+              <p className="text-sm text-white/70 mt-2">This may take a minute</p>
             </div>
           )}
 
           {video.status === 'failed' && (
             <div className="text-center py-12">
-              <p className="text-red-600 mb-2">❌ AI Analysis Failed</p>
-              <p className="text-sm text-gray-500">{video.analysisError}</p>
+              <p className="text-youtine-red mb-2 font-bold">❌ AI Analysis Failed</p>
+              <p className="text-sm text-white/70">{video.analysisError}</p>
             </div>
           )}
 
           {video.status === 'completed' && video.segments.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-600">No exercises detected in this video</p>
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-white">No exercises detected in this video</p>
+              <p className="text-sm text-white/70 mt-2">
                 The AI couldn't identify specific exercises. You can still log manually.
               </p>
             </div>
@@ -147,26 +147,27 @@ const WorkoutLogger = ({ videoId, onClose }) => {
                 return (
                   <div
                     key={index}
-                    className="border rounded-lg p-4 hover:shadow-md transition-shadow"
+                    className="border-2 border-white/20 rounded-lg p-4 hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <Play className="w-4 h-4 text-blue-600" />
-                          <span className="text-sm text-gray-500">
+                          <Play className="w-4 h-4 text-white" />
+                          <span className="text-sm text-white/60">
                             {formatTime(segment.timestamp)}
                           </span>
                         </div>
-                        
-                        <h3 className="text-lg font-semibold mb-2">
+
+                        <h3 className="text-lg font-bold mb-2 text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
                           {segment.exerciseName}
                         </h3>
-                        
+
                         <div className="flex flex-wrap gap-2 mb-3">
                           {segment.targetMuscles.map((muscle, i) => (
                             <span
                               key={i}
-                              className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-sm"
+                              className="px-2 py-1 bg-white/20 text-white rounded text-sm border border-white/30 font-bold uppercase tracking-wide"
+                              style={{ fontFamily: 'var(--font-display)' }}
                             >
                               {muscle}
                             </span>
@@ -174,7 +175,7 @@ const WorkoutLogger = ({ videoId, onClose }) => {
                         </div>
 
                         {lastLog && (
-                          <div className="text-sm text-gray-600 bg-gray-50 p-2 rounded">
+                          <div className="text-sm text-white/70 bg-white/10 p-2 rounded border border-white/20">
                             <History className="w-4 h-4 inline mr-1" />
                             Last time: {lastLog.sets.length} sets
                             {lastLog.sets.length > 0 && lastLog.sets[0].reps && (
@@ -189,7 +190,7 @@ const WorkoutLogger = ({ videoId, onClose }) => {
 
                       <button
                         onClick={() => handleAddLog(segment)}
-                        className="ml-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center gap-2"
+                        className="ml-4 px-4 py-2 champion-button rounded flex items-center gap-2"
                       >
                         <Plus className="w-4 h-4" />
                         Log

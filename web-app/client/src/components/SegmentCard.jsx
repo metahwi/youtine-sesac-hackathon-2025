@@ -16,7 +16,7 @@ const SegmentCard = ({ segment, onAdd, onPlay, onEdit, onDelete, showAddButton, 
   };
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
+    <div className="fire-card rounded-lg overflow-hidden transition-all">
       {/* Thumbnail */}
       <div className="relative">
         <img
@@ -51,7 +51,8 @@ const SegmentCard = ({ segment, onAdd, onPlay, onEdit, onDelete, showAddButton, 
             {segment.targetMuscles.map((muscle) => (
               <span
                 key={muscle}
-                className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded font-medium"
+                className="text-xs bg-white/20 text-white px-2 py-1 rounded font-bold uppercase tracking-wide border border-white/30"
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 {muscle}
               </span>
@@ -60,7 +61,7 @@ const SegmentCard = ({ segment, onAdd, onPlay, onEdit, onDelete, showAddButton, 
         )}
 
         {/* Time Range */}
-        <p className="text-xs text-gray-500 mb-3">
+        <p className="text-xs text-white/60 mb-3">
           {formatTime(segment.startTime)} - {formatTime(segment.endTime)}
         </p>
 
@@ -69,7 +70,7 @@ const SegmentCard = ({ segment, onAdd, onPlay, onEdit, onDelete, showAddButton, 
           {showAddButton && onAdd && (
             <button
               onClick={() => onAdd(segment._id)}
-              className="flex-1 bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded text-sm flex items-center justify-center gap-1 transition-colors"
+              className="flex-1 hyper-button px-3 py-2 rounded text-xs flex items-center justify-center gap-1"
             >
               <Plus className="w-4 h-4" /> Add
             </button>
@@ -78,7 +79,8 @@ const SegmentCard = ({ segment, onAdd, onPlay, onEdit, onDelete, showAddButton, 
           {showEditButton && onEdit && (
             <button
               onClick={() => onEdit(segment)}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-sm flex items-center justify-center gap-1 transition-colors"
+              className="flex-1 bg-white hover:bg-gray-100 text-black px-3 py-2 rounded text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 transition-all hover:scale-105 border-2 border-black"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               <Edit className="w-4 h-4" /> Edit
             </button>
@@ -87,7 +89,8 @@ const SegmentCard = ({ segment, onAdd, onPlay, onEdit, onDelete, showAddButton, 
           {showDeleteButton && onDelete && (
             <button
               onClick={() => onDelete(segment._id)}
-              className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-sm flex items-center justify-center gap-1 transition-colors"
+              className="bg-youtine-red hover:bg-red-700 text-white px-3 py-2 rounded text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 transition-all hover:scale-105 border-2 border-white"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               <Trash2 className="w-4 h-4" />
             </button>

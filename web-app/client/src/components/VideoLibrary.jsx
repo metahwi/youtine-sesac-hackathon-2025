@@ -15,7 +15,7 @@ const VideoLibrary = ({ videos, onAddToRoutine, onDeleteVideo, onPlayVideo, onLo
   if (!Array.isArray(videos)) {
     logger.error('VideoLibrary received non-array videos prop:', typeof videos, videos);
     return (
-      <div className="bg-white rounded-lg shadow-md p-8 text-center">
+      <div className="fire-card rounded-lg p-8 text-center">
         <p className="text-red-500">Error loading videos. Please refresh the page.</p>
       </div>
     );
@@ -23,15 +23,15 @@ const VideoLibrary = ({ videos, onAddToRoutine, onDeleteVideo, onPlayVideo, onLo
 
   if (videos.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-8 text-center">
-        <p className="text-gray-500">{t('noVideos')}</p>
+      <div className="fire-card rounded-lg p-8 text-center">
+        <p className="text-white/70">{t('noVideos')}</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-50 rounded-lg p-4">
-      <h2 className="text-lg font-semibold mb-4">{t('videoLibrary')}</h2>
+    <div className="fire-card rounded-lg p-4">
+      <h2 className="text-lg font-semibold mb-4 gold-glow" style={{ fontFamily: 'var(--font-display)' }}>{t('videoLibrary')}</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {videos.map((video) => (

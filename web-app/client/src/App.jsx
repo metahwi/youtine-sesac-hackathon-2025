@@ -266,59 +266,67 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div className="min-h-screen bg-background">
+      {/* Header - ARENA FIRE */}
+      <header className="sticky top-0 z-50 backdrop-blur-md" style={{background: 'rgba(10, 10, 10, 0.85)', borderBottom: '3px solid rgba(255, 215, 0, 0.5)'}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
           <div className="flex items-center justify-between">
             <button
               onClick={() => setCurrentView('library')}
-              className="flex items-center hover:opacity-80 transition-opacity cursor-pointer px-4 py-2"
+              className="flex items-center hover:scale-105 transition-all duration-300 cursor-pointer group"
               aria-label="Go to home"
             >
-              <img src="/youtine-wordmark.png" alt="YouTine" className="h-14" />
+              <img
+                src="/youtine_logo_v3.png"
+                alt="YouTine Fitness & Media"
+                className="h-40 -my-10 transition-transform duration-300 group-hover:scale-110 white-glow"
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
+              />
             </button>
-            
-            {/* Navigation */}
+
+            {/* Navigation - CHAMPIONSHIP BUTTONS */}
             <div className="flex items-center gap-4">
-              <nav className="flex gap-2">
+              <nav className="flex gap-3">
                 <button
                   onClick={() => setCurrentView('segments')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors font-medium ${
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-lg transition-all duration-300 ${
                     currentView === 'segments'
-                      ? 'bg-black text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'champion-button pulse-active'
+                      : 'ghost-button'
                   }`}
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  <Play className="w-4 h-4" />
+                  <Play className="w-5 h-5" />
                   {t('segments') || 'Segments'}
                 </button>
 
                 <button
                   onClick={() => setCurrentView('library')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors font-medium ${
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-lg transition-all duration-300 ${
                     currentView === 'library'
-                      ? 'bg-black text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'champion-button pulse-active'
+                      : 'ghost-button'
                   }`}
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  <Video className="w-4 h-4" />
+                  <Video className="w-5 h-5" />
                   {t('videos') || 'Videos'}
                 </button>
 
                 <button
                   onClick={() => setCurrentView('dashboard')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors font-medium ${
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-lg transition-all duration-300 ${
                     currentView === 'dashboard'
-                      ? 'bg-black text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'champion-button pulse-active'
+                      : 'ghost-button'
                   }`}
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  <LayoutDashboard className="w-4 h-4" />
+                  <LayoutDashboard className="w-5 h-5" />
                   {t('dashboard') || 'Dashboard'}
                 </button>
               </nav>
-              
+
               <LanguageSwitcher />
             </div>
           </div>

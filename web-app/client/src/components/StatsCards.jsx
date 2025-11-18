@@ -18,33 +18,29 @@ const StatsCards = ({ stats }) => {
       title: t('workoutsThisMonth') || 'Workouts This Month',
       value: stats.workoutsThisMonth || 0,
       icon: Calendar,
-      color: 'blue',
-      bgColor: 'bg-blue-100',
-      textColor: 'text-blue-600'
+      bgColor: 'bg-white/10',
+      textColor: 'text-white'
     },
     {
       title: t('currentStreak') || 'Current Streak',
       value: `${stats.currentStreak || 0} ${stats.currentStreak === 1 ? 'day' : 'days'}`,
       icon: Flame,
-      color: 'orange',
-      bgColor: 'bg-orange-100',
-      textColor: 'text-orange-600'
+      bgColor: 'bg-white/10',
+      textColor: 'text-white'
     },
     {
       title: t('totalSets') || 'Total Sets',
       value: stats.totalSetsThisMonth || 0,
       icon: Dumbbell,
-      color: 'green',
-      bgColor: 'bg-green-100',
-      textColor: 'text-green-600'
+      bgColor: 'bg-white/10',
+      textColor: 'text-white'
     },
     {
       title: t('totalReps') || 'Total Reps',
       value: stats.totalRepsThisMonth || 0,
       icon: Target,
-      color: 'purple',
-      bgColor: 'bg-purple-100',
-      textColor: 'text-purple-600'
+      bgColor: 'bg-white/10',
+      textColor: 'text-white'
     }
   ];
 
@@ -56,7 +52,7 @@ const StatsCards = ({ stats }) => {
         return (
           <div
             key={index}
-            className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+            className="fire-card rounded-lg p-6"
           >
             <div className="flex items-center justify-between mb-4">
               <div className={`p-3 rounded-lg ${card.bgColor}`}>
@@ -64,11 +60,11 @@ const StatsCards = ({ stats }) => {
               </div>
             </div>
             
-            <h3 className="text-gray-600 text-sm font-medium mb-1">
+            <h3 className="text-white/70 text-sm font-medium mb-1 uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
               {card.title}
             </h3>
             
-            <p className="text-3xl font-bold text-gray-900">
+            <p className="text-3xl font-bold gold-glow">
               {card.value}
             </p>
           </div>

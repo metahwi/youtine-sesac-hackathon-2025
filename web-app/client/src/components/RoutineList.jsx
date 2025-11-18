@@ -24,16 +24,16 @@ const RoutineList = ({ routines, activeRoutineId, onSelectRoutine, onCreateRouti
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 h-full">
+    <div className="fire-card rounded-lg p-4 h-full">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold flex items-center gap-2">
-          <Dumbbell className="text-blue-600" size={24} />
+        <h2 className="text-xl font-bold flex items-center gap-2 gold-glow" style={{ fontFamily: 'var(--font-display)' }}>
+          <Dumbbell className="text-white" size={24} />
           {t('routines')}
         </h2>
-        
+
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md transition-colors duration-200"
+          className="champion-button p-2 rounded-md"
           title={t('createRoutine')}
         >
           <Plus size={20} />
@@ -41,28 +41,29 @@ const RoutineList = ({ routines, activeRoutineId, onSelectRoutine, onCreateRouti
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="mb-4 p-3 bg-gray-50 rounded-md">
+        <form onSubmit={handleSubmit} className="mb-4 p-3 bg-white/5 rounded-md border border-white/10">
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t('routineName')}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 bg-white/10 border border-white/20 text-white placeholder-white/50 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-white"
             autoFocus
           />
-          
+
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder={t('description')}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full px-3 py-2 bg-white/10 border border-white/20 text-white placeholder-white/50 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-white resize-none"
             rows="2"
           />
           
           <div className="flex gap-2">
             <button
               type="submit"
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+              className="flex-1 champion-button px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               {t('create')}
             </button>
@@ -73,7 +74,8 @@ const RoutineList = ({ routines, activeRoutineId, onSelectRoutine, onCreateRouti
                 setName('');
                 setDescription('');
               }}
-              className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+              className="flex-1 bg-white hover:bg-gray-100 text-black px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider border-2 border-black"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               {t('cancel')}
             </button>
@@ -83,29 +85,29 @@ const RoutineList = ({ routines, activeRoutineId, onSelectRoutine, onCreateRouti
 
       <div className="space-y-2 max-h-[calc(100vh-250px)] overflow-y-auto">
         {routines.length === 0 ? (
-          <p className="text-gray-500 text-sm text-center py-4">
+          <p className="text-white/70 text-sm text-center py-4">
             {t('noRoutines')}
           </p>
         ) : (
           routines.map((routine) => (
             <div
               key={routine._id}
-              className={`p-3 rounded-md cursor-pointer transition-all duration-200 group ${
+              className={`p-3 rounded-md cursor-pointer transition-all duration-200 group border-2 ${
                 activeRoutineId === routine._id
-                  ? 'bg-blue-100 border-2 border-blue-600'
-                  : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
+                  ? 'bg-white/20 border-white'
+                  : 'bg-white/5 border-white/20 hover:bg-white/10'
               }`}
             >
               <div className="flex items-start justify-between">
-                <div 
+                <div
                   className="flex-1"
                   onClick={() => onSelectRoutine(routine._id)}
                 >
-                  <h3 className="font-semibold text-sm mb-1">{routine.name}</h3>
+                  <h3 className="font-bold text-sm mb-1 text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>{routine.name}</h3>
                   {routine.description && (
-                    <p className="text-xs text-gray-600 mb-1 line-clamp-2">{routine.description}</p>
+                    <p className="text-xs text-white/70 mb-1 line-clamp-2">{routine.description}</p>
                   )}
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-white/60">
                     {routine.videos?.length || 0} {routine.videos?.length === 1 ? t('video') : t('videos')}
                   </p>
                 </div>

@@ -57,12 +57,12 @@ const PastWorkouts = () => {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="fire-card rounded-lg p-6">
         <div className="animate-pulse">
-          <div className="h-6 bg-gray-200 rounded w-1/3 mb-4"></div>
+          <div className="h-6 bg-white/20 rounded w-1/3 mb-4"></div>
           <div className="space-y-3">
-            <div className="h-20 bg-gray-100 rounded"></div>
-            <div className="h-20 bg-gray-100 rounded"></div>
+            <div className="h-20 bg-white/10 rounded"></div>
+            <div className="h-20 bg-white/10 rounded"></div>
           </div>
         </div>
       </div>
@@ -71,12 +71,12 @@ const PastWorkouts = () => {
 
   if (recentLogs.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-12 text-center">
-        <Dumbbell className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-gray-700 mb-2">
+      <div className="fire-card rounded-lg p-12 text-center">
+        <Dumbbell className="w-16 h-16 text-white/30 mx-auto mb-4" />
+        <h3 className="text-xl font-bold text-white mb-2 uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
           {t('noWorkoutsYet') || 'No workouts logged yet'}
         </h3>
-        <p className="text-gray-500">
+        <p className="text-white/70">
           {t('startLogging') || 'Start logging your workouts to see your progress here!'}
         </p>
       </div>
@@ -86,11 +86,11 @@ const PastWorkouts = () => {
   const groupedLogs = groupLogsByDate(recentLogs);
 
   return (
-    <div className="bg-white rounded-lg shadow">
-      <div className="p-6 border-b">
+    <div className="fire-card rounded-lg">
+      <div className="p-6 border-b border-white/20">
         <div className="flex items-center gap-2">
-          <TrendingUp className="w-6 h-6 text-blue-600" />
-          <h2 className="text-xl font-bold">
+          <TrendingUp className="w-6 h-6 text-white" />
+          <h2 className="text-xl font-bold gold-glow" style={{ fontFamily: 'var(--font-display)' }}>
             {t('recentWorkouts') || 'Recent Workouts'}
           </h2>
         </div>
@@ -100,7 +100,7 @@ const PastWorkouts = () => {
         {Object.entries(groupedLogs).map(([date, logs]) => (
           <div key={date} className="space-y-3">
             {/* Date Header */}
-            <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <div className="flex items-center gap-2 text-sm font-bold text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
               <Calendar className="w-4 h-4" />
               {formatDate(logs[0].date)}
             </div>
@@ -110,23 +110,23 @@ const PastWorkouts = () => {
               {logs.map((log, index) => (
                 <div
                   key={log._id || index}
-                  className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors border border-white/20"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h4 className="font-semibold text-gray-900 mb-1">
+                      <h4 className="font-bold text-white mb-1 uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
                         {log.exerciseName}
                       </h4>
-                      
+
                       {/* Sets Summary */}
-                      <div className="flex flex-wrap gap-2 text-sm text-gray-600">
+                      <div className="flex flex-wrap gap-2 text-sm text-white/70">
                         {log.sets && log.sets.length > 0 && (
                           <span className="flex items-center gap-1">
                             <span className="font-medium">{log.sets.length}</span>
                             <span>{log.sets.length === 1 ? 'set' : 'sets'}</span>
                           </span>
                         )}
-                        
+
                         {log.sets && log.sets[0] && log.sets[0].reps && (
                           <span className="flex items-center gap-1">
                             <span>×</span>
@@ -134,7 +134,7 @@ const PastWorkouts = () => {
                             <span>reps</span>
                           </span>
                         )}
-                        
+
                         {log.sets && log.sets[0] && log.sets[0].weight && (
                           <span className="flex items-center gap-1">
                             <span>@</span>
@@ -146,7 +146,7 @@ const PastWorkouts = () => {
 
                       {/* Notes */}
                       {log.notes && (
-                        <p className="text-sm text-gray-500 mt-2 italic">
+                        <p className="text-sm text-white/60 mt-2 italic">
                           "{log.notes}"
                         </p>
                       )}
@@ -155,9 +155,9 @@ const PastWorkouts = () => {
                     {/* Total Volume Badge */}
                     {log.sets && log.sets.length > 0 && log.sets[0].weight && log.sets[0].reps && (
                       <div className="ml-4 text-right">
-                        <div className="text-xs text-gray-500">Volume</div>
-                        <div className="text-lg font-bold text-blue-600">
-                          {log.sets.reduce((total, set) => 
+                        <div className="text-xs text-white/60 uppercase tracking-wide">Volume</div>
+                        <div className="text-lg font-bold text-white">
+                          {log.sets.reduce((total, set) =>
                             total + (set.weight || 0) * (set.reps || 0), 0
                           )}
                           <span className="text-sm">kg</span>

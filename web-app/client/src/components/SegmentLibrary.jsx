@@ -92,34 +92,36 @@ const SegmentLibrary = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="fire-card rounded-lg p-6">
       {/* Header with View Toggle */}
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold">{t('exerciseLibrary') || 'Exercise Library'}</h2>
+        <h2 className="text-2xl font-bold gold-glow">{t('exerciseLibrary') || 'Exercise Library'}</h2>
 
         {/* View Mode Toggle */}
-        <div className="flex gap-2 bg-gray-100 p-1 rounded-lg">
+        <div className="flex gap-2 bg-white/10 p-1 rounded-lg">
           <button
             onClick={() => {
               setViewMode('segments');
               setSelectedVideoId('');
             }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors font-bold uppercase text-xs tracking-wider ${
               viewMode === 'segments'
-                ? 'bg-white text-black shadow-sm'
-                : 'text-gray-600 hover:text-black'
+                ? 'bg-black text-white border-2 border-white'
+                : 'text-white hover:bg-white/10'
             }`}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             <Grid className="w-4 h-4" />
             {t('segments') || 'Segments'}
           </button>
           <button
             onClick={() => setViewMode('videos')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors font-bold uppercase text-xs tracking-wider ${
               viewMode === 'videos'
-                ? 'bg-white text-black shadow-sm'
-                : 'text-gray-600 hover:text-black'
+                ? 'bg-black text-white border-2 border-white'
+                : 'text-white hover:bg-white/10'
             }`}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             <VideoIcon className="w-4 h-4" />
             {t('videos') || 'Videos'}
@@ -132,13 +134,13 @@ const SegmentLibrary = ({
         <div className="mb-6 space-y-3">
           {/* Search Bar */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-5 h-5" />
             <input
               type="text"
               placeholder={t('searchExercises') || 'Search exercises...'}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 bg-white/10 border-2 border-white/20 text-white placeholder-white/50 rounded-lg focus:ring-2 focus:ring-white focus:border-white"
             />
           </div>
 
@@ -147,11 +149,12 @@ const SegmentLibrary = ({
             <select
               value={selectedMuscle}
               onChange={(e) => setSelectedMuscle(e.target.value)}
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+              className="flex-1 px-4 py-2 bg-white/10 border-2 border-white/20 text-white rounded-lg focus:ring-2 focus:ring-white focus:border-white"
+              style={{ colorScheme: 'dark' }}
             >
-              <option value="">{t('allMuscles') || 'All Muscles'}</option>
+              <option value="" style={{ backgroundColor: '#0A0A0A', color: '#FFFFFF' }}>{t('allMuscles') || 'All Muscles'}</option>
               {muscleGroups.map((muscle) => (
-                <option key={muscle} value={muscle}>
+                <option key={muscle} value={muscle} style={{ backgroundColor: '#0A0A0A', color: '#FFFFFF' }}>
                   {muscle}
                 </option>
               ))}
@@ -160,7 +163,8 @@ const SegmentLibrary = ({
             {(searchTerm || selectedMuscle || selectedVideoId) && (
               <button
                 onClick={handleClearFilters}
-                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors"
+                className="px-4 py-2 bg-white hover:bg-gray-100 text-black rounded-lg transition-colors font-bold uppercase text-xs tracking-wider border-2 border-black"
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 {t('clearFilters') || 'Clear Filters'}
               </button>
@@ -169,13 +173,14 @@ const SegmentLibrary = ({
 
           {/* Active Filters Info */}
           {selectedVideoId && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex items-center justify-between">
-              <span className="text-sm text-blue-800">
+            <div className="bg-white/10 border border-white/30 rounded-lg p-3 flex items-center justify-between">
+              <span className="text-sm text-white">
                 {t('filteringByVideo') || 'Filtering by selected video'}
               </span>
               <button
                 onClick={() => setSelectedVideoId('')}
-                className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                className="text-white hover:text-white/80 text-sm font-bold uppercase tracking-wider"
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 {t('showAll') || 'Show All'}
               </button>

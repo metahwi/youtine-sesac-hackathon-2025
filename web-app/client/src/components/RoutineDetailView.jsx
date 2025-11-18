@@ -23,8 +23,8 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
   
   if (!routine) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-8 text-center">
-        <p className="text-gray-500">{t('selectRoutine')}</p>
+      <div className="fire-card rounded-lg p-8 text-center">
+        <p className="text-white/70">{t('selectRoutine')}</p>
       </div>
     );
   }
@@ -44,15 +44,15 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
   const totalDuration = routine.segments?.reduce((sum, segment) => sum + (segment.endTime - segment.startTime), 0) || 0;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="fire-card rounded-lg p-6">
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold mb-2">{routine.name}</h2>
+            <h2 className="text-2xl font-bold mb-2 gold-glow" style={{ fontFamily: 'var(--font-display)' }}>{routine.name}</h2>
             {routine.description && (
-              <p className="text-gray-600 mb-2">{routine.description}</p>
+              <p className="text-white/80 mb-2">{routine.description}</p>
             )}
-            <div className="flex gap-4 text-sm text-gray-500">
+            <div className="flex gap-4 text-sm text-white/60">
               <span>{routine.segments?.length || 0} {t('segments') || 'segments'}</span>
               <span>•</span>
               <span>{t('totalDuration')}: {formatDuration(totalDuration, t)}</span>
@@ -61,7 +61,7 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
           {routine.segments && routine.segments.length > 0 && onPlayRoutine && (
             <button
               onClick={() => onPlayRoutine(routine.segments)}
-              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors font-medium"
+              className="champion-button px-6 py-3 rounded-lg flex items-center gap-2"
             >
               <Play className="w-5 h-5" />
               {t('startRoutine') || 'Start Routine'}
@@ -77,7 +77,7 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className={`space-y-2 ${snapshot.isDraggingOver ? 'bg-blue-50 p-2 rounded-lg' : ''}`}
+                className={`space-y-2 ${snapshot.isDraggingOver ? 'bg-white/10 p-2 rounded-lg' : ''}`}
               >
                 {routine.segments.map((segment, index) => (
                   <Draggable key={segment._id} draggableId={segment._id} index={index}>
@@ -85,17 +85,17 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
-                        className={`bg-white border rounded-lg p-3 flex items-center gap-3 hover:shadow-md transition-all ${
-                          snapshot.isDragging ? 'shadow-lg border-yellow-400' : 'border-gray-200'
+                        className={`bg-white/5 border-2 rounded-lg p-3 flex items-center gap-3 hover:bg-white/10 transition-all ${
+                          snapshot.isDragging ? 'shadow-lg border-white' : 'border-white/20'
                         }`}
                       >
                         {/* Drag Handle */}
                         <div {...provided.dragHandleProps} className="cursor-grab active:cursor-grabbing">
-                          <GripVertical className="w-5 h-5 text-gray-400" />
+                          <GripVertical className="w-5 h-5 text-white/50" />
                         </div>
 
                         {/* Order Number */}
-                        <div className="flex-shrink-0 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                        <div className="flex-shrink-0 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center text-sm font-bold border-2 border-white/30">
                           {index + 1}
                         </div>
 
@@ -113,22 +113,23 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
 
                         {/* Segment Info */}
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-base mb-1">{segment.exerciseName}</h3>
-                          <p className="text-sm text-gray-600 line-clamp-1 mb-1">
+                          <h3 className="font-bold text-base mb-1 text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>{segment.exerciseName}</h3>
+                          <p className="text-sm text-white/70 line-clamp-1 mb-1">
                             {segment.sourceVideoId?.title}
                           </p>
                           <div className="flex items-center gap-2">
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-white/60">
                               {formatTime(segment.startTime)} - {formatTime(segment.endTime)}
                             </span>
                             {segment.targetMuscles && segment.targetMuscles.length > 0 && (
                               <>
-                                <span className="text-gray-300">•</span>
+                                <span className="text-white/30">•</span>
                                 <div className="flex gap-1">
                                   {segment.targetMuscles.slice(0, 3).map((muscle) => (
                                     <span
                                       key={muscle}
-                                      className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded"
+                                      className="text-xs bg-white/20 text-white px-2 py-0.5 rounded border border-white/30 font-bold uppercase tracking-wide"
+                                      style={{ fontFamily: 'var(--font-display)' }}
                                     >
                                       {muscle}
                                     </span>
@@ -144,7 +145,7 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
                           {onEditSegment && (
                             <button
                               onClick={() => onEditSegment(segment)}
-                              className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm flex items-center gap-1 transition-colors"
+                              className="px-3 py-2 bg-white hover:bg-gray-100 text-black rounded text-sm flex items-center gap-1 transition-colors border-2 border-black font-bold"
                               title="Edit segment"
                             >
                               <Edit className="w-4 h-4" />
@@ -153,7 +154,7 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
 
                           <button
                             onClick={() => onRemoveSegment(segment._id)}
-                            className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded text-sm flex items-center gap-1 transition-colors"
+                            className="px-3 py-2 bg-youtine-red hover:bg-red-700 text-white rounded text-sm flex items-center gap-1 transition-colors border-2 border-white font-bold"
                             title="Remove from routine"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -169,9 +170,9 @@ const RoutineDetailView = ({ routine, onUpdateRoutine, onRemoveSegment, onPlayRo
           </Droppable>
         </DragDropContext>
       ) : (
-        <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-          <p className="text-gray-500 mb-2">{t('emptyRoutine') || 'No segments in this routine yet'}</p>
-          <p className="text-sm text-gray-400">{t('addSegmentsFromLibrary') || 'Add segments from the Exercise Library'}</p>
+        <div className="text-center py-12 bg-white/5 rounded-lg border-2 border-dashed border-white/20">
+          <p className="text-white/70 mb-2">{t('emptyRoutine') || 'No segments in this routine yet'}</p>
+          <p className="text-sm text-white/50">{t('addSegmentsFromLibrary') || 'Add segments from the Exercise Library'}</p>
         </div>
       )}
     </div>

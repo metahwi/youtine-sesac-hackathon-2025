@@ -35,22 +35,22 @@ const DashboardPage = ({ routines = [] }) => {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+          <p className="mt-4 text-white">Loading dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-white shadow-sm">
+      <div className="fire-card rounded-lg mb-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold gold-glow" style={{ fontFamily: 'var(--font-display)' }}>
             {t('dashboard') || 'Dashboard'}
           </h1>
-          <p className="mt-1 text-gray-600">
+          <p className="mt-1 text-white/70">
             {t('dashboardSubtitle') || 'Track your fitness journey'}
           </p>
         </div>
@@ -63,10 +63,10 @@ const DashboardPage = ({ routines = [] }) => {
 
         {/* Calendar Section */}
         <div className="mt-8">
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="fire-card rounded-lg p-6">
             <div className="flex items-center gap-2 mb-6">
-              <Calendar className="w-6 h-6 text-blue-600" />
-              <h2 className="text-xl font-bold">
+              <Calendar className="w-6 h-6 text-white" />
+              <h2 className="text-xl font-bold gold-glow" style={{ fontFamily: 'var(--font-display)' }}>
                 {t('workoutCalendar') || 'Workout Calendar'}
               </h2>
             </div>
@@ -77,10 +77,10 @@ const DashboardPage = ({ routines = [] }) => {
         {/* Top Exercises */}
         {stats && stats.topExercises && stats.topExercises.length > 0 && (
           <div className="mt-8">
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="fire-card rounded-lg p-6">
               <div className="flex items-center gap-2 mb-6">
-                <TrendingUp className="w-6 h-6 text-blue-600" />
-                <h2 className="text-xl font-bold">
+                <TrendingUp className="w-6 h-6 text-white" />
+                <h2 className="text-xl font-bold gold-glow" style={{ fontFamily: 'var(--font-display)' }}>
                   {t('topExercises') || 'Top Exercises This Month'}
                 </h2>
               </div>
@@ -88,15 +88,15 @@ const DashboardPage = ({ routines = [] }) => {
                 {stats.topExercises.map((exercise, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                    className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/20 hover:bg-white/10 transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                      <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold border-2 border-white/30">
                         {index + 1}
                       </div>
-                      <span className="font-medium">{exercise.name}</span>
+                      <span className="font-bold text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>{exercise.name}</span>
                     </div>
-                    <span className="text-gray-600">
+                    <span className="text-white/70">
                       {exercise.count} {exercise.count === 1 ? 'workout' : 'workouts'}
                     </span>
                   </div>

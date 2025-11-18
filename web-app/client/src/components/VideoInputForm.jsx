@@ -34,23 +34,25 @@ const VideoInputForm = ({ onVideoAdded }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-      <h2 className="text-lg font-semibold mb-3">{t('addNewVideo')}</h2>
-      
-      <form onSubmit={handleSubmit} className="flex gap-2">
+    <div className="fire-card rounded-lg p-6 mb-6">
+      <h2 className="text-2xl mb-4 gold-glow" style={{ fontFamily: 'var(--font-display)' }}>
+        {t('addNewVideo')}
+      </h2>
+
+      <form onSubmit={handleSubmit} className="flex gap-3">
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder={t('pasteUrl')}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFE01E] focus:border-transparent"
+          className="flex-1 px-5 py-3 bg-white/10 border-2 border-white/20 text-white placeholder-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition-all"
           disabled={loading}
         />
-        
+
         <button
           type="submit"
           disabled={loading}
-          className="bg-[#FFE01E] hover:bg-[#F5D000] disabled:bg-gray-300 text-black px-6 py-2 rounded-md font-semibold transition-colors duration-200 flex items-center gap-2"
+          className="champion-button disabled:opacity-50 disabled:cursor-not-allowed px-8 py-3 rounded-lg flex items-center gap-2"
         >
           {loading ? (
             <>

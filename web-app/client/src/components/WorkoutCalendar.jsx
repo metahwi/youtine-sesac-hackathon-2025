@@ -146,47 +146,62 @@ const WorkoutCalendar = ({ routines = [] }) => {
         .workout-calendar-container {
           max-width: 100%;
         }
-        
+
         .react-calendar {
           width: 100%;
-          border: none;
-          font-family: inherit;
+          border: 2px solid rgba(255, 255, 255, 0.2);
+          font-family: var(--font-display);
+          background: rgba(10, 10, 10, 0.5);
+          border-radius: 8px;
+          color: white;
         }
-        
+
         .react-calendar__tile {
           padding: 0.5em;
           position: relative;
           height: 80px;
           cursor: pointer;
-        }
-        
-        .react-calendar__tile--active {
-          background: #3b82f6 !important;
+          background: rgba(255, 255, 255, 0.05);
           color: white;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
+        .react-calendar__tile--active {
+          background: #FF4500 !important;
+          color: #0A0A0A !important;
+          font-weight: bold;
+        }
+
         .react-calendar__tile--now {
-          background: #eff6ff;
+          background: rgba(255, 255, 255, 0.15) !important;
+          border: 2px solid rgba(255, 255, 255, 0.4) !important;
+          color: white !important;
         }
-        
+
         .workout-day {
-          background: #dbeafe !important;
+          background: rgba(255, 69, 0, 0.3) !important;
           font-weight: 600;
+          border: 2px solid #FF4500 !important;
+          color: white !important;
         }
-        
+
         .scheduled-day {
-          background: #fef3c7 !important;
+          background: rgba(255, 255, 255, 0.2) !important;
           font-weight: 600;
+          border: 2px solid rgba(255, 255, 255, 0.4) !important;
+          color: white !important;
         }
-        
+
         .workout-day.scheduled-day {
-          background: linear-gradient(135deg, #dbeafe 50%, #fef3c7 50%) !important;
+          background: linear-gradient(135deg, rgba(255, 69, 0, 0.4) 50%, rgba(255, 255, 255, 0.2) 50%) !important;
+          border: 2px solid #FF4500 !important;
+          color: white !important;
         }
-        
+
         .workout-day:hover, .scheduled-day:hover {
           opacity: 0.8;
         }
-        
+
         .tile-content {
           position: absolute;
           bottom: 2px;
@@ -197,68 +212,85 @@ const WorkoutCalendar = ({ routines = [] }) => {
           align-items: center;
           gap: 2px;
         }
-        
+
         .workout-indicator {
           display: flex;
           align-items: center;
           gap: 2px;
         }
-        
+
         .workout-dot {
           width: 6px;
           height: 6px;
-          background: #3b82f6;
+          background: #FF4500;
           border-radius: 50%;
         }
-        
+
         .workout-count {
           font-size: 9px;
-          background: #3b82f6;
+          background: #0A0A0A;
           color: white;
           padding: 1px 3px;
           border-radius: 8px;
           font-weight: bold;
+          border: 1px solid white;
         }
-        
+
         .scheduled-routines {
           display: flex;
           gap: 2px;
           flex-wrap: wrap;
           justify-content: center;
         }
-        
+
         .scheduled-routine-badge {
           font-size: 9px;
-          background: #fbbf24;
-          color: white;
+          background: white;
+          color: #0A0A0A;
           padding: 2px 4px;
           border-radius: 4px;
           font-weight: bold;
           display: flex;
           align-items: center;
           gap: 1px;
+          border: 1px solid #0A0A0A;
         }
-        
+
         .scheduled-routine-badge.completed {
-          background: #10b981;
+          background: #FF4500;
+          color: white;
+          border: 1px solid white;
         }
-        
+
         .react-calendar__navigation button {
           font-size: 1em;
-          font-weight: 600;
+          font-weight: 700;
+          color: white;
+          background: rgba(255, 255, 255, 0.05);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
-        
+
+        .react-calendar__navigation button:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
+
         .react-calendar__month-view__weekdays {
           text-transform: uppercase;
-          font-weight: 600;
+          font-weight: 700;
           font-size: 0.75em;
-          color: #6b7280;
+          color: rgba(255, 255, 255, 0.7);
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        .react-calendar__month-view__weekdays__weekday {
+          padding: 0.5em;
         }
       `}</style>
       
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
         </div>
       ) : (
         <>
@@ -270,17 +302,17 @@ const WorkoutCalendar = ({ routines = [] }) => {
             tileContent={tileContent}
             locale="en-US"
           />
-          
-          <div className="mt-4 flex gap-4 text-sm">
+
+          <div className="mt-4 flex gap-4 text-sm text-white font-bold uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
             {workoutDays.length > 0 && (
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-blue-200 rounded"></div>
+                <div className="w-4 h-4 bg-youtine-red rounded border border-white"></div>
                 <span>{workoutDays.length} workout {workoutDays.length === 1 ? 'day' : 'days'}</span>
               </div>
             )}
             {scheduledDays.length > 0 && (
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-yellow-200 rounded"></div>
+                <div className="w-4 h-4 bg-white rounded border border-black"></div>
                 <span>{scheduledDays.length} scheduled {scheduledDays.length === 1 ? 'day' : 'days'}</span>
               </div>
             )}
@@ -291,9 +323,9 @@ const WorkoutCalendar = ({ routines = [] }) => {
       {/* Schedule Modal */}
       {showScheduleModal && selectedDate && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-6">
+          <div className="fire-card rounded-lg max-w-md w-full p-6">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold">
+              <h3 className="text-xl font-bold gold-glow" style={{ fontFamily: 'var(--font-display)' }}>
                 Schedule Routine
               </h3>
               <button
@@ -301,18 +333,18 @@ const WorkoutCalendar = ({ routines = [] }) => {
                   setShowScheduleModal(false);
                   setSelectedDate(null);
                 }}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-white/70 hover:text-white"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
 
-            <p className="text-gray-600 mb-4">
-              {selectedDate.toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
+            <p className="text-white/70 mb-4">
+              {selectedDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
               })}
             </p>
 
@@ -324,31 +356,31 @@ const WorkoutCalendar = ({ routines = [] }) => {
               if (scheduledDay && scheduledDay.routines.length > 0) {
                 return (
                   <div className="mb-4">
-                    <h4 className="font-semibold mb-2">Scheduled Routines:</h4>
+                    <h4 className="font-bold mb-2 text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>Scheduled Routines:</h4>
                     <div className="space-y-2">
                       {scheduledDay.routines.map((scheduled) => (
-                        <div 
+                        <div
                           key={scheduled._id}
-                          className="flex items-center justify-between p-2 bg-gray-50 rounded"
+                          className="flex items-center justify-between p-2 bg-white/5 rounded border border-white/20"
                         >
                           <div className="flex items-center gap-2">
                             <button
                               onClick={(e) => handleToggleCompleted(scheduled._id, scheduled.completed, e)}
                               className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                                scheduled.completed 
-                                  ? 'bg-green-500 border-green-500' 
-                                  : 'border-gray-300'
+                                scheduled.completed
+                                  ? 'bg-youtine-red border-white'
+                                  : 'border-white/50'
                               }`}
                             >
                               {scheduled.completed && <Check className="w-3 h-3 text-white" />}
                             </button>
-                            <span className={scheduled.completed ? 'line-through text-gray-500' : ''}>
+                            <span className={`font-bold uppercase tracking-wider ${scheduled.completed ? 'line-through text-white/50' : 'text-white'}`} style={{ fontFamily: 'var(--font-display)' }}>
                               {scheduled.routine.name}
                             </span>
                           </div>
                           <button
                             onClick={(e) => handleDeleteScheduled(scheduled._id, e)}
-                            className="text-red-600 hover:text-red-700"
+                            className="text-youtine-red hover:text-red-700"
                           >
                             <X className="w-4 h-4" />
                           </button>
@@ -363,22 +395,22 @@ const WorkoutCalendar = ({ routines = [] }) => {
 
             {/* Add new routine */}
             <div>
-              <h4 className="font-semibold mb-2">Add Routine:</h4>
+              <h4 className="font-bold mb-2 text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>Add Routine:</h4>
               {routines.length === 0 ? (
-                <p className="text-gray-500 text-sm">No routines available. Create a routine first.</p>
+                <p className="text-white/70 text-sm">No routines available. Create a routine first.</p>
               ) : (
                 <div className="space-y-2 max-h-64 overflow-y-auto">
                   {routines.map((routine) => (
                     <button
                       key={routine._id}
                       onClick={() => handleScheduleRoutine(routine._id)}
-                      className="w-full text-left p-3 border rounded hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                      className="w-full text-left p-3 border-2 border-white/20 rounded hover:bg-white/10 hover:border-white/40 transition-colors bg-white/5"
                     >
-                      <div className="font-medium">{routine.name}</div>
+                      <div className="font-bold text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>{routine.name}</div>
                       {routine.description && (
-                        <div className="text-sm text-gray-600">{routine.description}</div>
+                        <div className="text-sm text-white/70">{routine.description}</div>
                       )}
-                      <div className="text-xs text-gray-500 mt-1">
+                      <div className="text-xs text-white/60 mt-1">
                         {routine.videos?.length || 0} videos
                       </div>
                     </button>

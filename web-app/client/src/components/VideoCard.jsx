@@ -25,7 +25,7 @@ const VideoCard = ({
   const { t } = useLanguage();
   
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+    <div className="fire-card rounded-lg overflow-hidden group">
       <div className="relative cursor-pointer" onClick={() => onPlay && onPlay(video)}>
         <img
           src={video.thumbnail}
@@ -78,18 +78,19 @@ const VideoCard = ({
                 e.stopPropagation();
                 onCreateSegment(video);
               }}
-              className="flex-1 flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-black px-3 py-2 rounded-md text-xs font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105 border-2 border-black"
+              style={{ fontFamily: 'var(--font-display)' }}
               title="Create segment manually"
             >
               <Edit3 size={16} />
-              {t('createSegment') || 'Create Segment'}
+              {t('createSegment') || 'Create'}
             </button>
           )}
 
           {showAddButton && onAdd && (
             <button
               onClick={() => onAdd(video)}
-              className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="flex-1 flex items-center justify-center gap-2 champion-button px-3 py-2 rounded-md text-xs"
             >
               <Plus size={16} />
               {t('add')}
@@ -99,28 +100,31 @@ const VideoCard = ({
           {showLogButton && onLogWorkout && (
             <button
               onClick={() => onLogWorkout(video)}
-              className="flex-1 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-black px-3 py-2 rounded-md text-xs font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105 border-2 border-black"
+              style={{ fontFamily: 'var(--font-display)' }}
               title="Log workout"
             >
               <Clipboard size={16} />
               {t('log') || 'Log'}
             </button>
           )}
-          
+
           {showRemoveButton && onRemove && (
             <button
               onClick={() => onRemove(video)}
-              className="flex-1 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="flex-1 flex items-center justify-center gap-2 bg-youtine-red hover:bg-red-700 text-white px-3 py-2 rounded-md text-xs font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105 border-2 border-white"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               <Trash2 size={16} />
               {t('remove')}
             </button>
           )}
-          
+
           {showDeleteButton && onDelete && (
             <button
               onClick={() => onDelete(video)}
-              className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="flex items-center justify-center gap-2 bg-youtine-red hover:bg-red-700 text-white px-3 py-2 rounded-md text-xs font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105 border-2 border-white"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               <Trash2 size={16} />
               {t('delete')}
