@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+const ytdl = require('@distube/ytdl-core');
 const Video = require('../models/Video');
 const Routine = require('../models/Routine');
 const axios = require('axios');
@@ -35,12 +37,35 @@ router.post('/', async (req, res) => {
     }
 
     logger.info(`Fetching metadata for video: ${videoId}`);
-    
+
     let title = 'YouTube Video';
     let thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     let duration = 0;
+    let description = '';
 
-    // Try YouTube Data API v3 if API key is available
+    // Try ytdl-core first (most reliable and includes description)
+    try {
+      logger.info(`Fetching metadata with ytdl-core for video ${videoId}...`);
+      const info = await ytdl.getInfo(videoId);
+
+      if (info && info.videoDetails) {
+        title = info.videoDetails.title || title;
+        duration = parseInt(info.videoDetails.lengthSeconds) || 0;
+        description = info.videoDetails.description || '';
+
+        // Get best quality thumbnail
+        if (info.videoDetails.thumbnails && info.videoDetails.thumbnails.length > 0) {
+          const thumbnails = info.videoDetails.thumbnails;
+          thumbnail = thumbnails[thumbnails.length - 1].url; // Highest quality
+        }
+
+        logger.success(`Fetched via ytdl-core: ${title} (${duration}s)`);
+      }
+    } catch (ytdlError) {
+      logger.warn('ytdl-core failed, falling back to other methods:', ytdlError.message);
+    }
+
+    // Try YouTube Data API v3 if API key is available and ytdl-core failed
     const youtubeApiKey = process.env.YOUTUBE_API_KEY;
     if (youtubeApiKey) {
       try {
@@ -134,8 +159,8 @@ router.post('/', async (req, res) => {
       title,
       thumbnail,
       duration,
-      status: 'pending', // AI analysis pending
-      segments: []
+      description,
+      status: 'pending' // AI analysis pending
     });
 
     await newVideo.save();
@@ -145,7 +170,7 @@ router.post('/', async (req, res) => {
     res.status(201).json(newVideo);
 
     // Trigger background AI analysis (non-blocking)
-    performBackgroundAnalysis(newVideo._id, url, title);
+    performBackgroundAnalysis(newVideo._id, url, title, description);
 
   } catch (error) {
     logger.error('Error adding video:', error);
@@ -157,10 +182,10 @@ router.post('/', async (req, res) => {
  * Background function to analyze video with AI
  * Updates video document when complete
  */
-async function performBackgroundAnalysis(videoId, videoUrl, videoTitle) {
+async function performBackgroundAnalysis(videoId, videoUrl, videoTitle, videoDescription = '') {
   try {
     logger.info(`Starting background AI analysis for video ${videoId}`);
-    
+
     // Check if OpenAI API key is available
     if (!process.env.OPENAI_API_KEY) {
       logger.warn('OpenAI API key not configured, skipping AI analysis');
@@ -176,6 +201,21 @@ async function performBackgroundAnalysis(videoId, videoUrl, videoTitle) {
     logger.success(`AI analysis completed for video ${videoId}`);
   } catch (error) {
     logger.error(`Background AI analysis failed for video ${videoId}:`, error.message);
+
+    // Ensure video status is updated even on catastrophic failure
+    // (analyzeVideo should handle this internally, but this is a safety net)
+    try {
+      const video = await Video.findById(videoId);
+      if (video && (video.status === 'pending' || video.status === 'processing')) {
+        await Video.findByIdAndUpdate(videoId, {
+          status: 'failed',
+          analysisError: error.message || 'Unknown error during analysis'
+        });
+        logger.warn(`Updated video ${videoId} status to failed after catastrophic error`);
+      }
+    } catch (updateError) {
+      logger.error(`Failed to update video status after error:`, updateError.message);
+    }
   }
 }
 
@@ -246,7 +286,7 @@ router.delete('/:id', async (req, res) => {
  * Helper function to extract video ID from YouTube URL
  */
 function extractVideoId(url) {
-  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+  const regex = /(?:youtube\.com\/(?:shorts\/|[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
   const match = url.match(regex);
   return match ? match[1] : null;
 }
@@ -258,7 +298,13 @@ function extractVideoId(url) {
 router.get('/:id/segments', async (req, res) => {
   try {
     const ExerciseSegment = require('../models/ExerciseSegment');
-    const segments = await ExerciseSegment.find({ sourceVideoId: req.params.id })
+
+    // Convert string ID to ObjectId for proper MongoDB query
+    const videoObjectId = mongoose.Types.ObjectId.isValid(req.params.id)
+      ? new mongoose.Types.ObjectId(req.params.id)
+      : req.params.id;
+
+    const segments = await ExerciseSegment.find({ sourceVideoId: videoObjectId })
       .sort({ startTime: 1 });
 
     logger.info(`Fetched ${segments.length} segments for video ${req.params.id}`);

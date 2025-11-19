@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const ExerciseSegment = require('../models/ExerciseSegment');
 const Video = require('../models/Video');
+const Routine = require('../models/Routine');
 const { createLogger } = require('../utils/logger');
 
 const logger = createLogger('segments');
@@ -13,10 +15,11 @@ const logger = createLogger('segments');
  *   - search: Filter by exercise name (case-insensitive)
  *   - muscleGroup: Filter by target muscle
  *   - videoId: Get segments from specific video
+ *   - routineId: Get segments that belong to a specific routine
  */
 router.get('/', async (req, res) => {
   try {
-    const { search, muscleGroup, videoId } = req.query;
+    const { search, muscleGroup, videoId, routineId } = req.query;
 
     // Build query
     const query = {};
@@ -27,7 +30,25 @@ router.get('/', async (req, res) => {
       query.targetMuscles = muscleGroup;
     }
     if (videoId) {
-      query.sourceVideoId = videoId;
+      // Convert string ID to ObjectId for proper MongoDB query
+      query.sourceVideoId = mongoose.Types.ObjectId.isValid(videoId)
+        ? new mongoose.Types.ObjectId(videoId)
+        : videoId;
+    }
+
+    // If filtering by routine, restrict segments to those referenced by the routine
+    if (routineId) {
+      const routine = await Routine.findById(routineId).select('segments');
+      if (!routine) {
+        return res.status(404).json({ error: 'Routine not found' });
+      }
+
+      const segmentIds = routine.segments || [];
+      if (!segmentIds.length) {
+        return res.json([]);
+      }
+
+      query._id = { $in: segmentIds };
     }
 
     const segments = await ExerciseSegment.find(query)
@@ -43,22 +64,16 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * GET /api/segments/:id
- * Get single segment by ID
+ * GET /api/segments/meta/muscle-groups
+ * Get list of all unique muscle groups
  */
-router.get('/:id', async (req, res) => {
+router.get('/meta/muscle-groups', async (req, res) => {
   try {
-    const segment = await ExerciseSegment.findById(req.params.id)
-      .populate('sourceVideoId');
-
-    if (!segment) {
-      return res.status(404).json({ error: 'Segment not found' });
-    }
-
-    res.json(segment);
+    const muscleGroups = await ExerciseSegment.distinct('targetMuscles');
+    res.json(muscleGroups.sort());
   } catch (error) {
-    logger.error('Error fetching segment:', error);
-    res.status(500).json({ error: 'Failed to fetch segment' });
+    logger.error('Error fetching muscle groups:', error);
+    res.status(500).json({ error: 'Failed to fetch muscle groups' });
   }
 });
 
@@ -169,16 +184,22 @@ router.delete('/:id', async (req, res) => {
 });
 
 /**
- * GET /api/segments/meta/muscle-groups
- * Get list of all unique muscle groups
+ * GET /api/segments/:id
+ * Get single segment by ID
  */
-router.get('/meta/muscle-groups', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const muscleGroups = await ExerciseSegment.distinct('targetMuscles');
-    res.json(muscleGroups.sort());
+    const segment = await ExerciseSegment.findById(req.params.id)
+      .populate('sourceVideoId');
+
+    if (!segment) {
+      return res.status(404).json({ error: 'Segment not found' });
+    }
+
+    res.json(segment);
   } catch (error) {
-    logger.error('Error fetching muscle groups:', error);
-    res.status(500).json({ error: 'Failed to fetch muscle groups' });
+    logger.error('Error fetching segment:', error);
+    res.status(500).json({ error: 'Failed to fetch segment' });
   }
 });
 

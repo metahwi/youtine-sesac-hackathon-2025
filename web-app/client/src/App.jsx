@@ -41,6 +41,7 @@ function App() {
   const [editingSegment, setEditingSegment] = useState(null);
   const [editingVideo, setEditingVideo] = useState(null);
   const [playingSegments, setPlayingSegments] = useState(null);
+  const [queueItems, setQueueItems] = useState([]);
 
   // Fetch initial data
   useEffect(() => {
@@ -52,8 +53,10 @@ function App() {
   useEffect(() => {
     if (activeRoutineId) {
       fetchRoutineDetails(activeRoutineId);
+      fetchRoutineQueue(activeRoutineId);
     } else {
       setActiveRoutine(null);
+      setQueueItems([]);
     }
   }, [activeRoutineId]);
 
@@ -107,6 +110,21 @@ function App() {
     }
   };
 
+  const fetchRoutineQueue = async (id) => {
+    try {
+      const data = await routineAPI.getRoutineQueue(id);
+      if (Array.isArray(data)) {
+        setQueueItems(data);
+      } else {
+        logger.warn('API returned invalid data for routine queue:', data);
+        setQueueItems([]);
+      }
+    } catch (error) {
+      logger.error('Error fetching routine queue:', error);
+      setQueueItems([]);
+    }
+  };
+
   const handleVideoAdded = async (url) => {
     await videoAPI.addVideo(url);
     await fetchVideos();
@@ -136,31 +154,66 @@ function App() {
     }
   };
 
-  const handleAddToRoutine = async (videoId) => {
+  const handleAddToRoutine = async (video) => {
+    const videoId = typeof video === 'string' ? video : video?._id;
+
+    if (!videoId) {
+      logger.warn('handleAddToRoutine called without a valid videoId', video);
+      return;
+    }
+
     if (!activeRoutine) {
       alert(t('selectRoutineFirst') || 'Please select a routine first');
       return;
     }
 
     try {
-      const updatedRoutine = await routineAPI.updateRoutine(activeRoutine._id, {
-        videos: [...activeRoutine.videos.map(v => v._id), videoId]
-      });
+      // Delegate queue item management to the backend
+      const updatedRoutine = await routineAPI.addVideoToRoutine(activeRoutine._id, videoId);
       setActiveRoutine(updatedRoutine);
+      await fetchRoutineQueue(activeRoutine._id);
       await fetchRoutines();
     } catch (error) {
       logger.error('Error adding video to routine:', error);
     }
   };
 
-  const handleRemoveFromRoutine = async (videoId) => {
+  const handleRemoveFromRoutine = async (video) => {
+    const videoId = typeof video === 'string' ? video : video?._id;
+
+    if (!videoId) {
+      logger.warn('handleRemoveFromRoutine called without a valid videoId', video);
+      return;
+    }
+
     if (!activeRoutine) return;
 
     try {
+      const remainingVideoIds = (activeRoutine.videos || [])
+        .filter(v => v._id !== videoId)
+        .map(v => v._id);
+
+      // Remove any segments that belong to this video from the routine queue
+      let remainingSegmentIds = activeRoutine.segments?.map(s => s._id) || [];
+      try {
+        const videoSegments = await videoAPI.getVideoSegments(videoId);
+        const segmentIdsToRemove = new Set((videoSegments || []).map(s => s._id));
+
+        if (segmentIdsToRemove.size > 0) {
+          remainingSegmentIds = remainingSegmentIds.filter(
+            (id) => !segmentIdsToRemove.has(id)
+          );
+        }
+      } catch (innerError) {
+        logger.warn('Failed to fetch segments for video while removing from routine:', innerError);
+      }
+
       const updatedRoutine = await routineAPI.updateRoutine(activeRoutine._id, {
-        videos: activeRoutine.videos.filter(v => v._id !== videoId).map(v => v._id)
+        videos: remainingVideoIds,
+        segments: remainingSegmentIds
       });
       setActiveRoutine(updatedRoutine);
+      await fetchRoutineQueue(activeRoutine._id);
       await fetchRoutines();
     } catch (error) {
       logger.error('Error removing video from routine:', error);
@@ -355,6 +408,7 @@ function App() {
               {/* Routine Detail View */}
               <RoutineDetailView
                 routine={activeRoutine}
+                queueItems={queueItems}
                 onUpdateRoutine={handleUpdateRoutine}
                 onRemoveSegment={handleRemoveSegmentFromRoutine}
                 onPlayRoutine={handlePlayRoutine}
@@ -396,6 +450,7 @@ function App() {
               {/* Routine Detail View */}
               <RoutineDetailView
                 routine={activeRoutine}
+                queueItems={queueItems}
                 onUpdateRoutine={handleUpdateRoutine}
                 onRemoveVideo={handleRemoveFromRoutine}
                 onPlayVideo={handlePlayVideo}

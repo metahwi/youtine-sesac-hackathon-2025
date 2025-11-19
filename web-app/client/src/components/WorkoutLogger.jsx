@@ -24,16 +24,24 @@ const WorkoutLogger = ({ videoId, onClose }) => {
   const loadVideoData = async () => {
     try {
       setLoading(true);
-      const videoData = await videoAPI.getVideo(videoId);
+
+      // Fetch video details and segments separately
+      const [videoData, segmentsData] = await Promise.all([
+        videoAPI.getVideo(videoId),
+        videoAPI.getVideoSegments(videoId)
+      ]);
+
+      // Merge segments into video object
+      videoData.segments = segmentsData || [];
       setVideo(videoData);
-      
+
       // Load history for each exercise
       if (videoData.segments && videoData.segments.length > 0) {
         const historyPromises = videoData.segments.map(segment =>
           logAPI.getExerciseHistory(segment.exerciseName, 1)
         );
         const histories = await Promise.all(historyPromises);
-        
+
         const historyMap = {};
         videoData.segments.forEach((segment, index) => {
           if (histories[index] && histories[index].length > 0) {
@@ -101,7 +109,7 @@ const WorkoutLogger = ({ videoId, onClose }) => {
             <h2 className="text-2xl font-bold gold-glow" style={{ fontFamily: 'var(--font-display)' }}>{video.title}</h2>
             <p className="text-white/70 mt-1">
               {video.status === 'pending' && '⏳ Analyzing video...'}
-              {video.status === 'completed' && `✅ ${video.segments.length} exercises detected`}
+              {video.status === 'completed' && video.segments && `✅ ${video.segments.length} exercises detected`}
               {video.status === 'failed' && '❌ Analysis failed'}
             </p>
           </div>
@@ -130,7 +138,7 @@ const WorkoutLogger = ({ videoId, onClose }) => {
             </div>
           )}
 
-          {video.status === 'completed' && video.segments.length === 0 && (
+          {video.status === 'completed' && video.segments && video.segments.length === 0 && (
             <div className="text-center py-12">
               <p className="text-white">No exercises detected in this video</p>
               <p className="text-sm text-white/70 mt-2">
@@ -139,7 +147,7 @@ const WorkoutLogger = ({ videoId, onClose }) => {
             </div>
           )}
 
-          {video.status === 'completed' && video.segments.length > 0 && (
+          {video.status === 'completed' && video.segments && video.segments.length > 0 && (
             <div className="space-y-4">
               {video.segments.map((segment, index) => {
                 const lastLog = exerciseHistory[segment.exerciseName];

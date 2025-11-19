@@ -23,9 +23,17 @@ mongoose.connect(MONGODB_URI, {
 // Routes
 const videoRoutes = require('./routes/videos');
 const routineRoutes = require('./routes/routines');
+const segmentRoutes = require('./routes/segments');
+const logRoutes = require('./routes/logs');
+const dashboardRoutes = require('./routes/dashboard');
+const scheduleRoutes = require('./routes/schedule');
 
 app.use('/api/videos', videoRoutes);
 app.use('/api/routines', routineRoutes);
+app.use('/api/segments', segmentRoutes);
+app.use('/api/logs', logRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/schedule', scheduleRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

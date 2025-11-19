@@ -51,6 +51,7 @@ export const segmentAPI = {
     if (filters.search) params.append('search', filters.search);
     if (filters.muscleGroup) params.append('muscleGroup', filters.muscleGroup);
     if (filters.videoId) params.append('videoId', filters.videoId);
+    if (filters.routineId) params.append('routineId', filters.routineId);
 
     const response = await api.get(`/segments?${params.toString()}`);
     return response.data;
@@ -125,9 +126,21 @@ export const routineAPI = {
     return response.data;
   },
 
+  // Get normalized queue items (segments and/or whole videos)
+  getRoutineQueue: async (id) => {
+    const response = await api.get(`/routines/${id}/queue`);
+    return response.data;
+  },
+
   // Update a routine (add, remove, or reorder videos)
   updateRoutine: async (id, updateData) => {
     const response = await api.put(`/routines/${id}`, updateData);
+    return response.data;
+  },
+
+  // Add a video to a routine and ensure queue items exist
+  addVideoToRoutine: async (routineId, videoId) => {
+    const response = await api.post(`/routines/${routineId}/videos`, { videoId });
     return response.data;
   },
 

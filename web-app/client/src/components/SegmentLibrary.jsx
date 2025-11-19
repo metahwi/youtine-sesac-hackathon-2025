@@ -38,7 +38,7 @@ const SegmentLibrary = ({
       fetchVideos();
     }
     fetchMuscleGroups();
-  }, [viewMode, searchTerm, selectedMuscle, selectedVideoId]);
+  }, [viewMode, searchTerm, selectedMuscle, selectedVideoId, activeRoutine?._id]);
 
   const fetchSegments = async () => {
     try {
@@ -47,6 +47,7 @@ const SegmentLibrary = ({
       if (searchTerm) filters.search = searchTerm;
       if (selectedMuscle) filters.muscleGroup = selectedMuscle;
       if (selectedVideoId) filters.videoId = selectedVideoId;
+      if (activeRoutine?._id) filters.routineId = activeRoutine._id;
 
       const data = await segmentAPI.getAllSegments(filters);
       setSegments(data);

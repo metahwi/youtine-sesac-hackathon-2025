@@ -122,16 +122,18 @@ const WorkoutCalendar = ({ routines = [] }) => {
           )}
           {scheduledDay && (
             <div className="scheduled-routines">
-              {scheduledDay.routines.map((scheduled, idx) => (
-                <div 
-                  key={idx} 
-                  className={`scheduled-routine-badge ${scheduled.completed ? 'completed' : ''}`}
-                  title={scheduled.routine.name}
-                >
-                  {scheduled.completed && <Check className="w-2 h-2" />}
-                  {scheduled.routine.name.substring(0, 1)}
-                </div>
-              ))}
+              {scheduledDay.routines
+                .filter(scheduled => scheduled.routine !== null)
+                .map((scheduled, idx) => (
+                  <div
+                    key={idx}
+                    className={`scheduled-routine-badge ${scheduled.completed ? 'completed' : ''}`}
+                    title={scheduled.routine.name}
+                  >
+                    {scheduled.completed && <Check className="w-2 h-2" />}
+                    {scheduled.routine.name.substring(0, 1)}
+                  </div>
+                ))}
             </div>
           )}
         </div>
@@ -358,34 +360,36 @@ const WorkoutCalendar = ({ routines = [] }) => {
                   <div className="mb-4">
                     <h4 className="font-bold mb-2 text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>Scheduled Routines:</h4>
                     <div className="space-y-2">
-                      {scheduledDay.routines.map((scheduled) => (
-                        <div
-                          key={scheduled._id}
-                          className="flex items-center justify-between p-2 bg-white/5 rounded border border-white/20"
-                        >
-                          <div className="flex items-center gap-2">
-                            <button
-                              onClick={(e) => handleToggleCompleted(scheduled._id, scheduled.completed, e)}
-                              className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                                scheduled.completed
-                                  ? 'bg-youtine-red border-white'
-                                  : 'border-white/50'
-                              }`}
-                            >
-                              {scheduled.completed && <Check className="w-3 h-3 text-white" />}
-                            </button>
-                            <span className={`font-bold uppercase tracking-wider ${scheduled.completed ? 'line-through text-white/50' : 'text-white'}`} style={{ fontFamily: 'var(--font-display)' }}>
-                              {scheduled.routine.name}
-                            </span>
-                          </div>
-                          <button
-                            onClick={(e) => handleDeleteScheduled(scheduled._id, e)}
-                            className="text-youtine-red hover:text-red-700"
+                      {scheduledDay.routines
+                        .filter(scheduled => scheduled.routine !== null)
+                        .map((scheduled) => (
+                          <div
+                            key={scheduled._id}
+                            className="flex items-center justify-between p-2 bg-white/5 rounded border border-white/20"
                           >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                      ))}
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={(e) => handleToggleCompleted(scheduled._id, scheduled.completed, e)}
+                                className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                                  scheduled.completed
+                                    ? 'bg-youtine-red border-white'
+                                    : 'border-white/50'
+                                }`}
+                              >
+                                {scheduled.completed && <Check className="w-3 h-3 text-white" />}
+                              </button>
+                              <span className={`font-bold uppercase tracking-wider ${scheduled.completed ? 'line-through text-white/50' : 'text-white'}`} style={{ fontFamily: 'var(--font-display)' }}>
+                                {scheduled.routine.name}
+                              </span>
+                            </div>
+                            <button
+                              onClick={(e) => handleDeleteScheduled(scheduled._id, e)}
+                              className="text-youtine-red hover:text-red-700"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
                     </div>
                   </div>
                 );

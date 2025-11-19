@@ -6,7 +6,7 @@
 
 [![2025 SeSAC Hackathon](https://img.shields.io/badge/2025-SeSAC_Hackathon-00D084?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkSURBVHgB7cxBDQAgAMDAjv+fBiMIlEwvFPpnFmZjYWZmZnYBLycEF0vKFzwAAAAASUVORK5CYII=)](https://github.com/metahwi/youtine-sesac-hackathon-2025)
 [![React](https://img.shields.io/badge/React-19.1.0-61DAFB?style=flat-square&logo=react)](https://react.dev)
-[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4--mini-412991?style=flat-square&logo=openai)](https://openai.com)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-412991?style=flat-square&logo=openai)](https://openai.com)
 [![OpenCV](https://img.shields.io/badge/OpenCV-Motion_Tracking-5C3EE8?style=flat-square&logo=opencv)](https://opencv.org)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/metahwi/youtine-sesac-hackathon-2025)
 
@@ -117,7 +117,7 @@
 
 **"30분 하체, 유산소"** 같은 간단한 요청만으로 AI가 자동으로 최적의 운동 루틴을 생성합니다.
 
-- 📹 **유튜브 영상 자동 분석**: OpenAI GPT-4-mini로 자막 분석
+- 📹 **유튜브 영상 자동 분석**: OpenAI GPT-4o-mini로 자막 분석
 - ✂️ **스마트 구간 분할**: 긴 영상을 운동 동작 단위로 자동 분할 (예: 스쿼트 구간만 추출)
 - 🎯 **맞춤형 루틴 조합**: 목표, 시간, 숙련도에 맞는 운동 영상 자동 조합
 - 🔄 **끊김 없는 재생**: 여러 영상의 구간들을 하나의 루틴으로 연속 재생
@@ -211,7 +211,7 @@
       <br/>
       <img src="https://img.shields.io/badge/MongoDB-8.19.1-47A248?logo=mongodb" alt="MongoDB"/>
       <br/>
-      <img src="https://img.shields.io/badge/OpenAI-GPT--4--mini-412991?logo=openai" alt="OpenAI"/>
+      <img src="https://img.shields.io/badge/OpenAI-GPT--4o--mini-412991?logo=openai" alt="OpenAI"/>
     </td>
     <td width="33%" align="center">
       <h3>AI/ML</h3>
@@ -241,12 +241,12 @@
 ### Backend
 - **Node.js** + Express 5.1.0 - RESTful API 서버
 - **MongoDB** + Mongoose 8.19.1 - NoSQL 데이터베이스
-- **OpenAI API** (GPT-4-mini) - 운동 영상 자막 분석
+- **OpenAI API** (GPT-4o-mini) - 운동 영상 자막 분석
 - **YouTube Transcript API** - 자막 추출
 - **YTDL Core** - YouTube 메타데이터 수집
 
 ### AI/ML
-- **OpenAI GPT-4-mini** - 자연어 처리 및 운동 구간 분석
+- **OpenAI GPT-4o-mini** - 자연어 처리 및 운동 구간 분석
 - **MediaPipe Pose** - 실시간 포즈 추정 (33개 랜드마크)
 - **OpenCV (cv2)** - 영상 처리 및 시각화
 - **NumPy** - 각도 계산 및 수치 처리

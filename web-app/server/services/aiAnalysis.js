@@ -19,7 +19,7 @@ const openai = process.env.OPENAI_API_KEY ? new OpenAI({
  * Extract video ID from YouTube URL
  */
 function extractVideoId(url) {
-  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+  const regex = /(?:youtube\.com\/(?:shorts\/|[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
   const match = url.match(regex);
   return match ? match[1] : null;
 }
@@ -102,7 +102,7 @@ IMPORTANT:
     logger.info('Sending transcript to LLM for analysis...');
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-4o-mini",
       messages: [
         { role: "system", content: "You are a fitness expert who analyzes workout videos." },
         { role: "user", content: prompt }
@@ -204,11 +204,23 @@ async function analyzeVideo(videoId) {
   } catch (error) {
     logger.error(`Analysis failed for video ${videoId}:`, error.message);
 
-    // Update video with error status
-    await Video.findByIdAndUpdate(videoId, {
-      status: 'failed',
-      analysisError: error.message
-    });
+    // Check if error is due to missing transcript
+    const isTranscriptError = error.message.toLowerCase().includes('transcript');
+
+    if (isTranscriptError) {
+      // Graceful degradation: Allow video to succeed without AI analysis
+      await Video.findByIdAndUpdate(videoId, {
+        status: 'completed',
+        analysisError: 'AI analysis unavailable (no transcript). You can add segments manually.'
+      });
+      logger.warn(`Video ${videoId} completed without AI analysis (no transcript available)`);
+    } else {
+      // For other errors, mark as failed
+      await Video.findByIdAndUpdate(videoId, {
+        status: 'failed',
+        analysisError: error.message
+      });
+    }
   }
 }
 

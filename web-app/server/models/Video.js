@@ -24,6 +24,10 @@ const videoSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  description: {
+    type: String,
+    default: ''
+  },
   // AI Analysis fields (segments moved to ExerciseSegment model)
   status: {
     type: String,
